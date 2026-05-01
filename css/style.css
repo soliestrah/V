@@ -283,6 +283,7 @@
       z-index: 1;
       text-align: center;
       max-width: 640px;
+        margin: 0 auto;
     }
  
     .hero__eyebrow {
@@ -385,7 +386,7 @@
     ::-webkit-scrollbar-track { background: var(--c-bg); }
     ::-webkit-scrollbar-thumb { background: var(--c-accent-prune); border-radius: 2px; }
  
-    /* ============================================================
+    /* ===================================================e=========
        RESPONSIVE — mobile
        ============================================================ */
     @media (max-width: 768px) {
