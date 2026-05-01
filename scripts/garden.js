@@ -59,8 +59,7 @@ const CARDS = [
   {
     id: 3,
     title: 'Pelargonium Pinki Pinks',
-    desc: 'Peu exploité en herboristerie classique, mais les feuilles des pélargoniums odorants sont antiseptiques et répulsives contre les moustiques. Les fleurs sont comestibles, utilisées en décoration culinaire.
-',
+    desc: 'Peu exploité en herboristerie classique, mais les feuilles des pélargoniums odorants sont antiseptiques et répulsives contre les moustiques. Les fleurs sont comestibles, utilisées en décoration culinaire.',
     content: `Mettre un pot près d'une fenêtre ouverte : l'odeur des feuilles froissées éloigne les moustiques naturellement.`,
     tags: ['ouest', 'deco'],
     status: 'Pelargonium × hortorum',
