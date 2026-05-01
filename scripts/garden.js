@@ -3,7 +3,7 @@
 // ============================================================
 
 const PAGE = {
-  eyebrow: `antichambreV · garden`,
+  eyebrow: `antichambreV · ce qui pousse dans le jardin`,
   title: `JARDIN`,
 };
 
