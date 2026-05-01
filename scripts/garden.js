@@ -3,8 +3,8 @@
 // ============================================================
 
 const PAGE = {
-  eyebrow: 'antichambreV · section 1',
-  title: '[Nom de la collection]',
+  eyebrow: 'antichambreV · garden',
+  title: 'JARDIN',
 };
 
 // Groupes de filtres
@@ -12,21 +12,21 @@ const PAGE = {
 const FILTER_GROUPS = [
   {
     id: '1',
-    label: 'filtre 1',
+    label: 'exposition',
     filters: [
       { value: 'all',   label: 'tout' },
-      { value: 'tag-a', label: 'tag a' },
-      { value: 'tag-b', label: 'tag b' },
-      { value: 'tag-c', label: 'tag c' },
+      { value: 'ouest', label: 'ouest' },
+      { value: 'est', label: 'est' },
     ]
   },
   {
     id: '2',
-    label: 'filtre 2',
+    label: 'utilisation',
     filters: [
       { value: 'all',   label: 'tout' },
-      { value: 'tag-x', label: 'tag x' },
-      { value: 'tag-y', label: 'tag y' },
+      { value: 'infusion', label: 'infusion' },
+       { value: 'deco', label: 'fleurs' },
+      { value: 'fruits', label: 'fruits/légumes' },
     ]
   },
 ];
@@ -37,37 +37,65 @@ const FILTER_GROUPS = [
 const CARDS = [
   {
     id: 1,
-    title: 'Titre de la carte',
-    desc: 'Description courte visible sur la carte.',
-    content: `Contenu long visible dans le panel. Tu peux écrire autant que tu veux ici — notes, observations, réflexions. Ce champ accepte du texte libre.`,
-    tags: ['tag-a', 'tag-x'],
-    status: 'en cours',
+    title: 'Verveine citronnelle',
+    desc: 'Grande favorite des herboristes. Ses feuilles riches en citral et limonène en font un antistress de premier ordre. Infusion classique contre les insomnies légères, les digestions difficiles et les spasmes intestinaux.',
+    content: `Récolter avant floraison pour un arôme maximal. Sécher à l'ombre, les feuilles perdent vite leur huile essentielle à la chaleur.`,
+    tags: ['ouest', 'infusion'],
+    status: 'Aloysia citrodora',
     links: [
-      { label: 'ressource 1', url: 'https://example.com' },
-      { label: 'ressource 2', url: 'https://example.com' },
+      { label: 'ressource 1', url: 'https://google.com' },
+      { label: 'ressource 2', url: 'https://google.com' },
     ]
   },
   {
     id: 2,
-    title: 'Deuxième carte',
-    desc: 'Un autre exemple avec des tags différents.',
-    content: `Notes longues sur cette entrée. Tout ce que tu veux garder en mémoire sur ce sujet.`,
-    tags: ['tag-b', 'tag-x'],
-    status: 'terminé',
+    title: 'Camomille allemande',
+    desc: 'La plus précieuse des camomilles. Contient de l'alpha-bisabolol et du chamazulène (huile bleue). Usage interne : crampes digestives, règles douloureuses, anxiété. Usage externe : peau irritée, eczéma, conjonctivite.',
+    content: `Récolter les capitules quand les ligules (pétales blancs) se rabattent vers le bas — signe de maturité optimale.`,
+    tags: ['ouest', 'infusion'],
+    status: 'Matricaria chamomilla',
     links: []
   },
   {
     id: 3,
-    title: 'Troisième carte',
-    desc: 'Encore un exemple — tag a + tag y.',
-    content: `Contenu détaillé de la troisième entrée.`,
-    tags: ['tag-a', 'tag-y'],
-    status: 'à faire',
+    title: 'Pelargonium 'Pinki Pinks'',
+    desc: 'Peu exploité en herboristerie classique, mais les feuilles des pélargoniums odorants sont antiseptiques et répulsives contre les moustiques. Les fleurs sont comestibles, utilisées en décoration culinaire.
+',
+    content: `ettre un pot près d'une fenêtre ouverte : l'odeur des feuilles froissées éloigne les moustiques naturellement.`,
+    tags: ['ouest', 'deco'],
+    status: 'Pelargonium × hortorum',
     links: [
       { label: 'voir plus', url: 'https://example.com' },
     ]
   },
   {
+    id: 4,
+    title: 'Nectarine 'Sweet Lady'',
+    desc: 'Les feuilles de pêcher/nectarinier sont traditionnellement utilisées en décoction contre la toux et les bronchites. Les amandes du noyau contiennent de l'amygdaline et sont à éviter en grande quantité.',
+    content: `Pruner les rameaux après récolte pour garder un port compact en pot. Un balcon bien ensoleillé suffit pour une bonne fructification.`,
+    tags: ['ouest', 'fruits'],
+    status: 'Prunus persica var. nucipersica',
+    links: []
+  },
+    {
+    id: 4,
+    title: 'Quatrième carte',
+    desc: 'Tag c + tag y.',
+    content: `Notes sur la quatrième entrée.`,
+    tags: ['tag-c', 'tag-y'],
+    status: 'en pause',
+    links: []
+  },
+    {
+    id: 4,
+    title: 'Quatrième carte',
+    desc: 'Tag c + tag y.',
+    content: `Notes sur la quatrième entrée.`,
+    tags: ['tag-c', 'tag-y'],
+    status: 'en pause',
+    links: []
+  },
+    {
     id: 4,
     title: 'Quatrième carte',
     desc: 'Tag c + tag y.',
