@@ -16,8 +16,9 @@
       --c-border-hover: rgba(201, 169, 110, 0.25);
  
       /* Typographie */
-      --font-display: 'Cormorant Garamond', Georgia, serif;
-      --font-mono:    'Inconsolata', monospace;
+      --font-display: 'Croissant_One', Georgia, serif;
+      --font-mono:    'Didact_Gothic', monospace;
+        --font-body: 'Imbue', serif;
  
       /* Espacement */
       --nav-width:    260px;
@@ -40,7 +41,7 @@
     body {
       background-color: var(--c-bg);
       color: var(--c-text);
-      font-family: var(--font-display);
+      font-family: var(--font-body);
       font-weight: 300;
       min-height: 100vh;
       display: flex;
