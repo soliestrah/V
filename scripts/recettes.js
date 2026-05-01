@@ -3,8 +3,8 @@
 // ============================================================
 
 const PAGE = {
-  eyebrow: 'antichambreV · section 1',
-  title: '[Nom de la collection]',
+  eyebrow: 'antichambreV · section 2',
+  title: 'recettes',
 };
 
 // Groupes de filtres
