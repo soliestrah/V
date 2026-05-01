@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>antichambreV — [nom de la page]</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="layout">
+
+    <!-- ===================== SIDEBAR ===================== -->
+    <!-- Copier/coller depuis index.html, changer .active sur le bon lien -->
+    <aside class="sidebar" role="navigation" aria-label="Navigation principale">
+      <div class="sidebar__identity">
+        <h1 class="sidebar__title">antichambre<span>V</span></h1>
+        <p class="sidebar__subtitle">soliestrah</p>
+        <div class="sidebar__divider"></div>
+      </div>
+      <nav>
+        <p class="nav__label">navigation</p>
+        <ul class="nav__list">
+          <li class="nav__item"><a href="index.html"><span class="nav__index">00</span>accueil</a></li>
+          <li class="nav__item"><a href="section-1.html" class="active" aria-current="page"><span class="nav__index">01</span>section 1</a></li>
+          <li class="nav__item"><a href="section-2.html"><span class="nav__index">02</span>section 2</a></li>
+          <li class="nav__item"><a href="section-3.html"><span class="nav__index">03</span>section 3</a></li>
+          <li class="nav__item"><a href="section-4.html"><span class="nav__index">04</span>section 4</a></li>
+        </ul>
+      </nav>
+      <footer class="sidebar__footer">
+        <p class="sidebar__sign">
+          <a href="https://github.com/soliestrah/V" target="_blank" rel="noopener">☽ soliestrah/V</a>
+        </p>
+      </footer>
+    </aside>
+
+    <!-- ===================== MAIN ===================== -->
+    <main class="main">
+
+      <!-- EN-TÊTE -->
+      <header class="page-header">
+        <p class="page-header__eyebrow">antichambreV · section 1</p>
+        <!-- ↓ Changer le titre de la page ici -->
+        <h2 class="page-header__title">[Nom de la collection]</h2>
+        <p class="page-header__count">
+          <span class="js-count">0</span> entrées
+        </p>
+      </header>
+
+      <!-- FILTRES -->
+      <!-- Pour ajouter un groupe de filtre : dupliquer un .filter-group
+           Pour ajouter un tag : dupliquer un .filter-tag avec data-filter et data-group correspondants -->
+      <section class="filters" aria-label="Filtres">
+
+        <!-- Groupe 1 — ex: catégorie, type, famille... -->
+        <div class="filter-group">
+          <span class="filter-group__label">filtre 1</span>
+          <div class="filter-group__tags">
+            <button class="filter-tag active" data-filter="all" data-group="1">tout</button>
+            <button class="filter-tag" data-filter="tag-a" data-group="1">tag a</button>
+            <button class="filter-tag" data-filter="tag-b" data-group="1">tag b</button>
+            <button class="filter-tag" data-filter="tag-c" data-group="1">tag c</button>
+          </div>
+        </div>
+
+        <!-- Groupe 2 — ex: statut, état, priorité... -->
+        <div class="filter-group">
+          <span class="filter-group__label">filtre 2</span>
+          <div class="filter-group__tags">
+            <button class="filter-tag active" data-filter="all" data-group="2">tout</button>
+            <button class="filter-tag" data-filter="tag-x" data-group="2">tag x</button>
+            <button class="filter-tag" data-filter="tag-y" data-group="2">tag y</button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- GRILLE -->
+      <section class="collection">
+        <div class="collection__grid" id="grid">
+
+          <!-- ================================================
+               CARTE — dupliquer ce bloc pour chaque entrée
+               data-tags : liste des tags séparés par des espaces
+                           doit correspondre aux data-filter des boutons
+               ================================================ -->
+          <article class="card" data-tags="tag-a tag-x">
+            <h3 class="card__title">Titre de la carte</h3>
+            <p class="card__desc">Description courte. Ce que tu veux noter sur cet élément — une phrase, quelques mots, une note.</p>
+            <div class="card__meta">
+              <div class="card__tags">
+                <span class="card__tag">tag a</span>
+                <span class="card__tag">tag x</span>
+              </div>
+              <span class="card__status">— statut</span>
+            </div>
+          </article>
+
+          <article class="card" data-tags="tag-b tag-x">
+            <h3 class="card__title">Deuxième carte</h3>
+            <p class="card__desc">Un autre exemple avec des tags différents.</p>
+            <div class="card__meta">
+              <div class="card__tags">
+                <span class="card__tag">tag b</span>
+                <span class="card__tag">tag x</span>
+              </div>
+              <span class="card__status">— statut</span>
+            </div>
+          </article>
+
+          <article class="card" data-tags="tag-a tag-y">
+            <h3 class="card__title">Troisième carte</h3>
+            <p class="card__desc">Encore un exemple — tag a + tag y.</p>
+            <div class="card__meta">
+              <div class="card__tags">
+                <span class="card__tag">tag a</span>
+                <span class="card__tag">tag y</span>
+              </div>
+              <span class="card__status">— statut</span>
+            </div>
+          </article>
+
+          <article class="card" data-tags="tag-c tag-y">
+            <h3 class="card__title">Quatrième carte</h3>
+            <p class="card__desc">Tag c + tag y.</p>
+            <div class="card__meta">
+              <div class="card__tags">
+                <span class="card__tag">tag c</span>
+                <span class="card__tag">tag y</span>
+              </div>
+              <span class="card__status">— statut</span>
+            </div>
+          </article>
+
+        </div>
+
+        <p class="collection__empty" id="empty">aucune entrée pour cette sélection.</p>
+      </section>
+
+    </main>
+  </div>
+</body>
+</html>
