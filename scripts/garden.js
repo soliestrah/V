@@ -39,7 +39,7 @@ const CARDS = [
     id: 1,
     title: `Verveine citronnelle`,
     desc: `Grande favorite des herboristes. Ses feuilles riches en citral et limonène en font un antistress de premier ordre. Infusion classique contre les insomnies légères, les digestions difficiles et les spasmes intestinaux.`,
-    content: `Récolter avant floraison pour un arôme maximal. Sécher à l`ombre, les feuilles perdent vite leur huile essentielle à la chaleur.`,
+    content: `Récolter avant floraison pour un arôme maximal. Sécher à l'ombre, les feuilles perdent vite leur huile essentielle à la chaleur.`,
     tags: [`ouest`, `infusion`],
     status: `Aloysia citrodora`,
     links: [
@@ -50,7 +50,7 @@ const CARDS = [
   {
     id: 2,
     title: `Camomille allemande`,
-    desc: `La plus précieuse des camomilles. Contient de l`alpha-bisabolol et du chamazulène (huile bleue). Usage interne : crampes digestives, règles douloureuses, anxiété. Usage externe : peau irritée, eczéma, conjonctivite.`,
+    desc: `La plus précieuse des camomilles. Contient de l'alpha-bisabolol et du chamazulène (huile bleue). Usage interne : crampes digestives, règles douloureuses, anxiété. Usage externe : peau irritée, eczéma, conjonctivite.`,
     content: `Récolter les capitules quand les ligules (pétales blancs) se rabattent vers le bas — signe de maturité optimale.`,
     tags: [`ouest`, `infusion`],
     status: `Matricaria chamomilla`,
@@ -60,7 +60,7 @@ const CARDS = [
     id: 3,
     title: `Pelargonium Pinki Pinks`,
     desc: `Peu exploité en herboristerie classique, mais les feuilles des pélargoniums odorants sont antiseptiques et répulsives contre les moustiques. Les fleurs sont comestibles, utilisées en décoration culinaire.`,
-    content: `Mettre un pot près d`une fenêtre ouverte : l`odeur des feuilles froissées éloigne les moustiques naturellement.`,
+    content: `Mettre un pot près d'une fenêtre ouverte : l'odeur des feuilles froissées éloigne les moustiques naturellement.`,
     tags: [`ouest`, `deco`],
     status: `Pelargonium × hortorum`,
     links: [
@@ -70,7 +70,7 @@ const CARDS = [
   {
     id: 4,
     title: `Nectarine Sweet Lady`,
-    desc: `Les feuilles de pêcher/nectarinier sont traditionnellement utilisées en décoction contre la toux et les bronchites. Les amandes du noyau contiennent de l`amygdaline et sont à éviter en grande quantité.`,
+    desc: `Les feuilles de pêcher/nectarinier sont traditionnellement utilisées en décoction contre la toux et les bronchites. Les amandes du noyau contiennent de l'amygdaline et sont à éviter en grande quantité.`,
     content: `Pruner les rameaux après récolte pour garder un port compact en pot. Un balcon bien ensoleillé suffit pour une bonne fructification.`,
     tags: [`ouest`, `fruits`],
     status: `Prunus persica var. nucipersica`,
