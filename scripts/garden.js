@@ -27,6 +27,7 @@ const FILTER_GROUPS = [
       { value: `infusion`, label: `infusion` },
        { value: `deco`, label: `fleurs` },
       { value: `fruits`, label: `fruits/légumes` },
+      { value: `aromatique`, label: `aromatique` },
     ]
   },
 ];
@@ -78,29 +79,83 @@ const CARDS = [
   },
     {
     id: 5,
-    title: `Quatrième carte`,
-    desc: `Tag c + tag y.`,
-    content: `Notes sur la quatrième entrée.`,
-    tags: [`tag-c`, `tag-y`],
-    status: `en pause`,
+    title: `Framboisier 'Fallgold'`,
+    desc: `Les feuilles de framboisier sont un remède herboriste emblématique. Riches en tanins et fragarine, elles tonifient l'utérus. Aussi utiles contre les diarrhées et les aphtes.`,
+    content: `Récoltez les jeunes feuilles au printemps avant floraison. Cette variété remontante donne deux récoltes : été et automne.`,
+    tags: [`ouest`, `fruits`],
+    status: `Rubus idaeus`,
     links: []
   },
     {
     id: 6,
-    title: `Quatrième carte`,
-    desc: `Tag c + tag y.`,
-    content: `Notes sur la quatrième entrée.`,
-    tags: [`tag-c`, `tag-y`],
-    status: `en pause`,
+    title: `Menthe verte`,
+    desc: `Plus douce que la menthe poivrée, idéale en cuisine et en infusion. L'herboriste l'utilise pour les nausées, maux de tête et mauvaise digestion. Le carvone qu'elle contient est antifongique.`,
+    content: `À isoler en pot car très envahissante. Pincer régulièrement pour densifier le feuillage et retarder la montée en graines.`,
+    tags: [`ouest`, `aromatique`],
+    status: `Mentha spicata`,
     links: []
   },
     {
     id: 7,
-    title: `Quatrième carte`,
-    desc: `Tag c + tag y.`,
-    content: `Notes sur la quatrième entrée.`,
-    tags: [`tag-c`, `tag-y`],
-    status: `en pause`,
+    title: `Menthe ananas`,
+    desc: `Variété originale au parfum fruité et doux. Moins puissante médicalement mais très appréciée en infusion légère, cocktails et cuisine. Propriétés digestives et antispasmodiques douces.`,
+    content: `Son feuillage panaché crème et vert en fait aussi une plante ornementale. Préfère une mi-ombre sur balcon exposé sud.`,
+    tags: [`ouest`, `aromatique`],
+    status: `Mentha suaveolens 'Variegata'`,
+    links: []
+  },
+      {
+    id: 8,
+    title: `Lavande grosso`,
+    desc: `La lavande la plus cultivée pour son huile essentielle. Linalol et acétate de linalyle lui confèrent de puissantes propriétés : anxiolytique, antalgique, cicatrisante. Application locale sur brûlures légères, piqûres, maux de tête. Éloigne les mites et moustiques.`,
+    content: `Tailler après floraison en ne coupant jamais dans le vieux bois. L'HE de lavandin 'Grosso' est plus camphrée que la vraie lavande fine.`,
+    tags: [`ouest`, `aromatique`],
+    status: `Lavandula × intermedia 'Grosso'`,
+    links: []
+  },
+        {
+    id: 9,
+    title: `Thym commun`,
+    desc: `Le plus puissant des aromatiques de balcon. Le thymol et le carvacrol sont parmi les antiseptiques naturels les plus efficaces. Bronchites, toux, rhumes : indispensable. Aussi antimycosique, digestif et vermifuge.`,
+    content: `Laisser fleurir une fois par an — les fleurs sont aussi médicinales et très mellifères. Supporte bien la sécheresse.`,
+    tags: [`ouest`, `aromatique`],
+    status: `Thymus vulgaris`,
+    links: []
+  },
+          {
+    id: 10,
+    title: `Fraisier gariguette`,
+    desc: `Les feuilles de fraisier sont riches en tanins et acide ellagique. En herboristerie : infusion dépurative, astringente pour les diarrhées, gingivites. Les fruits, riches en vitamine C et antioxydants, sont eux-mêmes considérés comme aliments-médicaments.`,
+    content: `Les stolons peuvent être supprimés pour concentrer l'énergie sur les fruits, ou laissés pour multiplier la plante gratuitement.`,
+    tags: [`ouest`, `fruits`],
+    status: `Fragaria × ananassa 'Gariguette'`,
+    links: []
+  },
+          {
+    id: 11,
+    title: `Basilic grand vert`,
+    desc: `Bien plus qu'une herbe de cuisine. Le basilic contient de l'eugénol et du linalol, actifs sur les spasmes digestifs, les nausées et les maux de tête. Traditionnellement utilisé contre l'anxiété légère et la fatigue nerveuse.`,
+    content: `Pincer les fleurs dès qu'elles apparaissent pour concentrer les huiles essentielles dans les feuilles. Récolter le matin, avant la chaleur.`,
+    tags: [`est`, `aromatique`],
+    status: `Ocimum basilicum`,
+    links: []
+  },
+          {
+    id: 12,
+    title: `Persil frisé`,
+    desc: `Le persil est une des plantes les plus riches en vitamine C, fer et apigénine (flavonoïde antioxydant). En herboristerie : diurétique doux, dépuratif, reminéralisant. Les feuilles fraîches mâchées neutralisent les mauvaises odeurs buccales.`,
+    content: `Couper au ras du sol en laissant le cœur — il repousse plusieurs fois. Éviter en tisane concentrée en cas de grossesse (apiol en quantité).`,
+    tags: [`est`, `aromatique`],
+    status: `Petroselinum crispum`,
+    links: []
+  },
+          {
+    id: 13,
+    title: `carte`,
+    desc: `Tag`,
+    content: `Notes`,
+    tags: [`tagc`, `tagy`],
+    status: `enpause`,
     links: []
   },
 ];
