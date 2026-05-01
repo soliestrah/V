@@ -16,7 +16,7 @@
       --c-border-hover: rgba(201, 169, 110, 0.25);
  
       /* Typographie */
-      --font-display: Georgia, serif;
+      --font-display: 'Croissant_One', Georgia, serif;
       --font-mono:    'Didact_Gothic', monospace;
         --font-body: 'Imbue', serif;
  
