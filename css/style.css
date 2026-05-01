@@ -117,7 +117,7 @@
     }
  
     .sidebar__title span {
-      color: var(--c-accent-or);
+      color: var(--c-accent-amethyste);
     }
  
     .sidebar__subtitle {
@@ -175,7 +175,7 @@
     .nav__item a:hover,
     .nav__item a.active {
       color: var(--c-text);
-      border-left-color: var(--c-accent-or);
+      border-left-color: var(--c-accent-amethyste);
       background: rgba(201, 169, 110, 0.05);
     }
  
@@ -308,7 +308,7 @@
  
     .hero__title em {
       font-style: italic;
-      color: var(--c-accent-or);
+      color: var(--c-accent-amethyste);
     }
  
     .hero__line {
@@ -360,7 +360,7 @@
  
     .hero__coords span:first-child {
       opacity: 0.6;
-      color: var(--c-accent-or);
+      color: var(--c-accent-amethyste);
     }
  
     /* ============================================================
