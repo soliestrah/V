@@ -14,9 +14,9 @@
     const activeFilters = {};
 
     // Initialiser depuis les boutons actifs au chargement
-    document.querySelectorAll('.filter-tag.active').forEach(btn => {
-      activeFilters[btn.dataset.group] = btn.dataset.filter;
-    });
+   document.querySelectorAll('.filter-tag.active').forEach(btn => {
+  activeFilters[btn.dataset.group] = btn.dataset.filter;
+});
 
     function applyFilters() {
       let visible = 0;
@@ -40,7 +40,7 @@
     // Écouteurs sur tous les boutons filtre
     document.querySelectorAll('.filter-tag').forEach(btn => {
       btn.addEventListener('click', () => {
-        const group = btn.dataset.group;
+      const group = btn.dataset.group;
 
         // Désactiver tous les boutons du même groupe
         document.querySelectorAll(`.filter-tag[data-group="${group}"]`).forEach(b => {
