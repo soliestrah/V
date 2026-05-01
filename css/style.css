@@ -308,7 +308,7 @@
       opacity: 0;
       animation: fade-up 1.2s var(--ease) 0.7s forwards;
       text-align: center;
-        margin-left: calc(var(--nav-width) / 2);
+        margin-left: calc(var(--nav-width) / -2);
     }
  
     .hero__title em {
