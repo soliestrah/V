@@ -307,6 +307,7 @@
       text-align: center;
       margin-left: calc(var(--nav-width) * -0.1);
       width: 100%;
+        padding-left: 0.15em;
     }
  
     .hero__title em {
