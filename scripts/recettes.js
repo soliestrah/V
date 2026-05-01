@@ -3,7 +3,7 @@
 // ============================================================
 
 const PAGE = {
-  eyebrow: 'antichambreV · section 2',
+  eyebrow: 'antichambreV · ce qui fait plaisir au ventre',
   title: 'recettes',
 };
 
