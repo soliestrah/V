@@ -408,6 +408,6 @@
       .nav__list { flex-direction: row; flex-wrap: wrap; gap: var(--gap-sm); }
  
       .layout { flex-direction: column; }
-      .main { margin-left: 0; }
+
     }
 
