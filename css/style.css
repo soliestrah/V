@@ -224,17 +224,17 @@
     /* ============================================================
        HERO — page d'accueil atmosphérique
        ============================================================ */
-    .hero {
-      position: relative;
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      overflow: hidden;
-      padding: var(--gap-xl) var(--gap-lg);
-  overflow: visible;
-    }
+.hero {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: var(--gap-xl) var(--gap-lg);
+}
  
     /* Fond — orbes colorées flottantes */
     .hero__bg {
