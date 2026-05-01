@@ -22,8 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       <footer class="sidebar__footer">
         <p class="sidebar__sign">
-          <a href="https://github.com/soliestrah/V" target="_blank" rel="noopener">☽ soliestrah/V</a>
-        </p>
+          <a href="https://minljiva.github.io/MINLJIVA/index.html" target="_blank" rel="noopener">☽ minljiva</a>
+        <a href="https://minljiva.github.io/iceolie/" target="_blank" rel="noopener">☉ iceolie</a>
+       </p>
       </footer>
 
     </aside>
