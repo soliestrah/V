@@ -31,7 +31,21 @@
       --ease:         cubic-bezier(0.25, 0.1, 0.25, 1);
       --dur:          0.35s;
     }
- 
+
+    /* Fonts */
+    @font-face {
+      font-family: 'Croissant_One';
+      src: url('fonts/Croissant_One/CroissantOne-Regular.ttf') format('truetype');
+    }
+    @font-face {
+      font-family: 'Didact Gothic';
+      src: url('fonts/Didact_Gothic/DidactGothic-Regular.ttf') format('truetype');
+    }
+    @font-face {
+      font-family: 'Imbue';
+      src: url('fonts/Imbue/Imbue-VariableFont_opsz,wght.ttf') format('truetype');
+    }
+
     /* ============================================================
        RESET
        ============================================================ */
