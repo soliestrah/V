@@ -58,10 +58,10 @@ const CARDS = [
   },
   {
     id: 3,
-    title: 'Pelargonium 'Pinki Pinks'',
+    title: 'Pelargonium Pinki Pinks',
     desc: 'Peu exploité en herboristerie classique, mais les feuilles des pélargoniums odorants sont antiseptiques et répulsives contre les moustiques. Les fleurs sont comestibles, utilisées en décoration culinaire.
 ',
-    content: `ettre un pot près d'une fenêtre ouverte : l'odeur des feuilles froissées éloigne les moustiques naturellement.`,
+    content: `Mettre un pot près d'une fenêtre ouverte : l'odeur des feuilles froissées éloigne les moustiques naturellement.`,
     tags: ['ouest', 'deco'],
     status: 'Pelargonium × hortorum',
     links: [
@@ -70,7 +70,7 @@ const CARDS = [
   },
   {
     id: 4,
-    title: 'Nectarine 'Sweet Lady'',
+    title: 'Nectarine Sweet Lady',
     desc: 'Les feuilles de pêcher/nectarinier sont traditionnellement utilisées en décoction contre la toux et les bronchites. Les amandes du noyau contiennent de l'amygdaline et sont à éviter en grande quantité.',
     content: `Pruner les rameaux après récolte pour garder un port compact en pot. Un balcon bien ensoleillé suffit pour une bonne fructification.`,
     tags: ['ouest', 'fruits'],
@@ -78,7 +78,7 @@ const CARDS = [
     links: []
   },
     {
-    id: 4,
+    id: 5,
     title: 'Quatrième carte',
     desc: 'Tag c + tag y.',
     content: `Notes sur la quatrième entrée.`,
@@ -87,7 +87,7 @@ const CARDS = [
     links: []
   },
     {
-    id: 4,
+    id: 6,
     title: 'Quatrième carte',
     desc: 'Tag c + tag y.',
     content: `Notes sur la quatrième entrée.`,
@@ -96,7 +96,7 @@ const CARDS = [
     links: []
   },
     {
-    id: 4,
+    id: 7,
     title: 'Quatrième carte',
     desc: 'Tag c + tag y.',
     content: `Notes sur la quatrième entrée.`,
