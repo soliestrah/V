@@ -40,7 +40,7 @@ const NATURES = [
 
 const FILTER_GROUPS = [
   {
-    id: 'statut',
+    id: 'statut_atelier',
     label: 'statut',
     filters: [
       { value: 'all', label: 'tout' },
@@ -48,7 +48,7 @@ const FILTER_GROUPS = [
     ]
   },
   {
-    id: 'nature',
+    id: 'nature_atelier',
     label: 'nature',
     filters: [
       { value: 'all', label: 'tout' },
@@ -131,19 +131,19 @@ function renderCards() {
     return `
       <article class="card" data-id="${t.id}">
         <div class="card__header">
-          <h3 class="card__title">${t.title}</h3>
+          <h3 class="card__title">${t.title_atelier}</h3>
           <div class="card__actions">
             <button class="card__btn card__btn--edit" data-id="${t.id}" aria-label="Modifier">✎</button>
             <button class="card__btn card__btn--delete" data-id="${t.id}" aria-label="Supprimer">✕</button>
           </div>
         </div>
-        ${t.description ? `<p class="card__desc">${t.description}</p>` : ''}
-        ${t.lien ? `<a class="card__link" href="${t.lien}" target="_blank" rel="noopener">↗ lien</a>` : ''}
-        ${t.nature === 'crochet' && t.temps_passe ? `<p class="card__temps">⏱ ${t.temps_passe}</p>` : ''}
+        ${t.description_atelier ? `<p class="card__desc">${t.description_atelier}</p>` : ''}
+        ${t.lien_atelier ? `<a class="card__link" href="${t.lien_atelier}" target="_blank" rel="noopener">↗ lien</a>` : ''}
+        ${t.nature_atelier === 'crochet' && t.temps_passe ? `<p class="card__temps">⏱ ${t.time_atelier}</p>` : ''}
         <div class="card__meta">
           <div class="card__tags">
             <span class="card__tag card__tag--nature">${natureObj.label}</span>
-            <span class="card__tag card__tag--statut card__tag--${t.statut}">${statutObj.label}</span>
+            <span class="card__tag card__tag--statut card__tag--${t.statut_atelier}">${statutObj.label}</span>
           </div>
           <span class="card__status">— ${formatDate(t.created_at)}</span>
         </div>
