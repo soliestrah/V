@@ -4,40 +4,51 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>antichambreV · atelier</title>
-    <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/section.css" />
   <link rel="stylesheet" href="css/panel.css" />
   <link rel="stylesheet" href="css/atelier.css" />
 </head>
 <body>
-  <main class="page">
+  <div class="layout">
 
-    <header class="page-header">
-      <p class="page-header__eyebrow"></p>
-      <h1 class="page-header__title"></h1>
-    </header>
+    <main class="main">
 
-    <div class="toolbar">
-      <div class="filters"></div>
-      <div class="toolbar-right">
-        <span class="count"><span class="js-count">0</span> tâche(s)</span>
-        <button class="btn-new" id="btn-new">+ nouvelle tâche</button>
+      <!-- EN-TÊTE -->
+      <header class="page-header">
+        <p class="page-header__eyebrow"></p>
+        <h1 class="page-header__title"></h1>
+        <p class="page-header__count">
+          <span class="js-count">0</span> tâche(s)
+        </p>
+      </header>
+
+      <!-- TOOLBAR -->
+      <div class="toolbar">
+        <section class="filters" aria-label="Filtres"></section>
+        <div class="toolbar-right">
+          <button class="btn-new" id="btn-new">+ nouvelle tâche</button>
+        </div>
       </div>
-    </div>
 
-    <div id="grid">
-      <p class="loading">chargement…</p>
-    </div>
-    <div id="empty">aucune tâche pour ces filtres.</div>
+      <!-- GRILLE -->
+      <section class="collection">
+        <div class="collection__grid" id="grid">
+          <p class="loading">chargement…</p>
+        </div>
+        <p class="collection__empty" id="empty">aucune tâche pour ces filtres.</p>
+      </section>
 
-  </main>
+    </main>
 
-  <!-- Overlay -->
-  <div id="panel-overlay"></div>
+  </div>
 
-  <!-- Panel / Form -->
-  <aside id="panel">
-    <div id="panel-inner"></div>
+  <!-- OVERLAY -->
+  <div class="panel-overlay" id="panel-overlay"></div>
+
+  <!-- PANEL DROIT -->
+  <aside class="panel" id="panel" aria-label="Détail">
+    <div class="panel__inner" id="panel-inner"></div>
   </aside>
 
   <script src="scripts/atelier.js"></script>
