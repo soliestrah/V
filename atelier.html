@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>antichambreV · atelier</title>
+</head>
+<body>
+  <main class="page">
+
+    <header class="page-header">
+      <p class="page-header__eyebrow"></p>
+      <h1 class="page-header__title"></h1>
+    </header>
+
+    <div class="toolbar">
+      <div class="filters"></div>
+      <div class="toolbar-right">
+        <span class="count"><span class="js-count">0</span> tâche(s)</span>
+        <button class="btn-new" id="btn-new">+ nouvelle tâche</button>
+      </div>
+    </div>
+
+    <div id="grid">
+      <p class="loading">chargement…</p>
+    </div>
+    <div id="empty">aucune tâche pour ces filtres.</div>
+
+  </main>
+
+  <!-- Overlay -->
+  <div id="panel-overlay"></div>
+
+  <!-- Panel / Form -->
+  <aside id="panel">
+    <div id="panel-inner"></div>
+  </aside>
+
+  <script src="scripts/atelier.js"></script>
+  <script src="scripts/nav.js"></script>
+</body>
+</html>
