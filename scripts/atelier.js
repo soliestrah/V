@@ -274,9 +274,9 @@ function buildFormHTML(tache = null) {
 
 function openForm(tache = null) {
   editingId = tache ? tache.id : null;
-  const panel    = document.getElementById('panel');
-  const panelInner = document.getElementById('panel-inner');
-  const overlay  = document.getElementById('panel-overlay');
+  const panel    = document.querySelector('.panel');
+  const panelInner = document.querySelector('.panel__inner');
+  const overlay  = document.querySelector('.panel-overlay');
 
   panelInner.innerHTML = buildFormHTML(tache);
   panel.classList.add('open');
@@ -341,8 +341,8 @@ function openForm(tache = null) {
 }
 
 function closeForm() {
-  const panel   = document.getElementById('panel');
-  const overlay = document.getElementById('panel-overlay');
+  const panel   = document.querySelector('.panel');
+  const overlay = document.querySelector('.panel-overlay');
   panel.classList.remove('open');
   overlay.classList.remove('visible');
   document.body.classList.remove('panel-open');
@@ -401,7 +401,7 @@ document.getElementById('grid').addEventListener('click', async e => {
 });
 
   // Fermer panel
-  document.getElementById('panel-overlay').addEventListener('click', closeForm);
+  document.querySelector('.panel-overlay').addEventListener('click', closeForm);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeForm(); });
 
   // Chargement initial
