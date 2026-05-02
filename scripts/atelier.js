@@ -373,28 +373,32 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('btn-new').addEventListener('click', () => openForm());
 
   // Clicks sur la grille (edit / delete)
-  document.getElementById('grid').addEventListener('click', async e => {
-    const editBtn   = e.target.closest('.card__btn--edit');
-    const deleteBtn = e.target.closest('.card__btn--delete');
+document.getElementById('grid').addEventListener('click', async e => {
+  const editBtn   = e.target.closest('.card__btn--edit');
+  const deleteBtn = e.target.closest('.card__btn--delete');
 
-    if (editBtn) {
-      const id = editBtn.dataset.id;
-      const tache = taches.find(t => t.id === id);
-      if (tache) openForm(tache);
-    }
+  if (editBtn) {
+    e.stopPropagation();
+    const id = editBtn.dataset.id;
+    const tache = taches.find(t => t.id === id);
+    if (tache) openForm(tache);
+    return;
+  }
 
-    if (deleteBtn) {
-      const id = deleteBtn.dataset.id;
-      if (!confirm('Supprimer cette tâche ?')) return;
-      try {
-        await deleteTache(id);
-        taches = taches.filter(t => t.id !== id);
-        renderCards();
-      } catch {
-        alert('Erreur lors de la suppression.');
-      }
+  if (deleteBtn) {
+    e.stopPropagation();
+    const id = deleteBtn.dataset.id;
+    if (!confirm('Supprimer cette tâche ?')) return;
+    try {
+      await deleteTache(id);
+      taches = taches.filter(t => t.id !== id);
+      renderCards();
+    } catch {
+      alert('Erreur lors de la suppression.');
     }
-  });
+    return;
+  }
+});
 
   // Fermer panel
   document.getElementById('panel-overlay').addEventListener('click', closeForm);
