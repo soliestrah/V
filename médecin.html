@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>antichambreV</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/section.css" />
+  <link rel="stylesheet" href="css/panel.css" />
+</head>
+
+<body>
+  <div class="layout">
+
+    <main class="main">
+
+      <!-- EN-TÊTE -->
+      <header class="page-header">
+        <p class="page-header__eyebrow"></p>
+        <h2 class="page-header__title"></h2>
+        <p class="page-header__count">
+          <span class="js-count">0</span> entrées
+        </p>
+      </header>
+
+      <!-- FILTRES -->
+      <section class="filters" aria-label="Filtres"></section>
+
+      <!-- GRILLE -->
+      <section class="collection">
+        <div class="collection__grid" id="grid"></div>
+        <p class="collection__empty" id="empty">aucune entrée pour cette sélection.</p>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- OVERLAY -->
+  <div class="panel-overlay" id="panel-overlay"></div>
+
+  <!-- PANEL DROIT -->
+  <aside class="panel" id="panel" aria-label="Détail">
+    <div class="panel__inner" id="panel-inner"></div>
+  </aside>
+
+  <script src="scripts/medecin.js"></script>
+  <script src="scripts/nav.js"></script>
+</body>
+</html>
