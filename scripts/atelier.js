@@ -392,20 +392,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
-  document.getElementById('panel-overlay').addEventListener('click', closeForm);
+document.getElementById('panel-overlay').addEventListener('click', closeForm);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeForm(); });
-
   const grid = document.getElementById('grid');
-  grid.innerHTML = `<p class="loading">chargement…</p>`;
+  grid.innerHTML = <p class="loading">chargement…</p>;
   try {
     taches = await fetchTaches();
     renderCards();
-  } catch {
-    grid.innerHTML = `<p class="loading">erreur de connexion à la base.</p>`;
+} catch {
+    grid.innerHTML = <p class="loading">erreur de connexion à la base.</p>;
   }
-});  { value: 'iceolie',     label: 'iceolie' },
-  { value: 'inspiration', label: 'inspiration' },
-];
+});
 
 const FILTER_GROUPS = [
   {
