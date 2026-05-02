@@ -12,7 +12,7 @@ const PAGE = {
 const FILTER_GROUPS = [
   {
     id: '1',
-    label: 'filtre 1',
+    label: 'spécialiste',
     filters: [
       { value: 'all',   label: 'tout' },
       { value: 'généraliste', label: 'généraliste' },
@@ -27,8 +27,8 @@ const CARDS = [
   {
     id: 1,
     title: 'Lipœdème',
-    desc: `Membre de la famille déjà touché : mère, grand mère. Mamie n'arrivait plus à marcher vers la fin de sa vie. Maman fait des drainages chez un kiné, marche beaucoup et cela aide grandement à stabiliser la maladie. Moi j'ai toujours eu des molets imposant. Avec les années cela s'aggrave, et depuis 1 semaine je sens une très grosse lourdeur dans les jambes. Après avoir utilisé un "machine gun" j'ai eu un soulagement puis cela est revenue encore plus fort. Sensation de jambes lourde, obligé de dormir (depuis des années) avec un coussin afin d'avoir une jambe surélevée. Lorsque je plie les jambes j'ai une très grande gêne. J'ai très souvent des fourmillements dans les pieds et la sensation de ne jamais être tout à fait confortable.`,
-    content: `Jambes lourdes, volumineuses et douloureuses, présence de bleus à la suite de coups minimes et fatigue sont parmi les symptômes les plus courants du lipœdème. La maladie affecte les membres inférieurs, parfois les membres supérieurs et d'autres parties du corps dans les stades les plus avancés.`,
+    desc: `Membre de la famille déjà touché : mère, grand mère.`,
+    content: `Jambes lourdes, volumineuses et douloureuses, présence de bleus à la suite de coups minimes et fatigue sont parmi les symptômes les plus courants du lipœdème. La maladie affecte les membres inférieurs, parfois les membres supérieurs et d'autres parties du corps dans les stades les plus avancés.<br/>Mamie n'arrivait plus à marcher vers la fin de sa vie. Maman fait des drainages chez un kiné, marche beaucoup et cela aide grandement à stabiliser la maladie. Moi j'ai toujours eu des molets imposant. Avec les années cela s'aggrave, et depuis 1 semaine je sens une très grosse lourdeur dans les jambes. Après avoir utilisé un "machine gun" j'ai eu un soulagement puis cela est revenue encore plus fort. Sensation de jambes lourde, obligé de dormir (depuis des années) avec un coussin afin d'avoir une jambe surélevée. Lorsque je plie les jambes j'ai une très grande gêne. J'ai très souvent des fourmillements dans les pieds et la sensation de ne jamais être tout à fait confortable. Au toucher mon mollet est très dur et je ne peux pas faire le tour de ma cheville avec ma main. Aussi j'ai la sensation que cela commence a atteindre le haut de mon corps, mes poignets sont plus gros et lorsque je pose mes mains à plat sur une surface je sens une gêne comme si j'avais un surplus de quelque chose qui empêche d'avoir un bon angle dans poignet/main`,
     tags: ['généraliste'],
     status: 'attente du RDV',
     links: [
