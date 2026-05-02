@@ -293,16 +293,16 @@ function openForm(tache = null) {
 
       // Afficher/masquer le champ temps si nature = crochet
       if (name === 'nature_atelier') {
-        document.getElementById('field-temps').style.display =
+        panelInner.querySelector('#field-temps').style.display =
           btn.dataset.value === 'crochet' ? 'block' : 'none';
       }
     });
   });
 
-  document.getElementById('form-close').addEventListener('click', closeForm);
-  document.getElementById('form-cancel').addEventListener('click', closeForm);
+  panelInner.querySelector('#form-close').addEventListener('click', closeForm);
+  panelInner.querySelector('#form-cancel').addEventListener('click', closeForm);
 
-  document.getElementById('tache-form').addEventListener('submit', async (e) => {
+  panelInner.querySelector('#tache-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const nature = formData.get('nature_atelier') || null;
@@ -331,7 +331,7 @@ function openForm(tache = null) {
       closeForm();
       renderCards();
     } catch (err) {
-      const errEl = document.getElementById('form-error');
+      const errEl = panelInner.querySelector('#form-error');
       errEl.textContent = 'Une erreur est survenue. Réessaie.';
       errEl.classList.remove('hidden');
       submitBtn.textContent = editingId ? 'enregistrer' : 'ajouter';
