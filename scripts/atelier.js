@@ -36,6 +36,8 @@ const NATURES = [
   { value: 'coding',      label: 'coding' },
   { value: 'iceolie',     label: 'iceolie' },
   { value: 'inspiration', label: 'inspiration' },
+  { value: 'learning',    label: 'learning' },
+  { value: 'autre',       label: 'autre' },
 ];
 
 const FILTER_GROUPS = [
