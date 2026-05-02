@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guide de Style Astral — antichambreV</title>
+  <!-- On réutilise tes styles existants -->
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Styles spécifiques pour le Guide Astral */
+    :root {
+      --c-accent-scorpio: #4a1c31; /* Nuance spécifique pour ton stellium Scorpion */
+      --c-accent-aries: #9e2a2b;   /* Nuance pour ton MC Bélier */
+    }
+
+    .astral-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: var(--gap-xl) var(--gap-md);
+    }
+
+    .astral-section {
+      margin-bottom: var(--gap-xl);
+      scroll-margin-top: var(--gap-lg);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fade-up 0.8s var(--ease) forwards;
+    }
+
+    .astral-section:nth-child(2) { animation-delay: 0.2s; }
+    .astral-section:nth-child(3) { animation-delay: 0.4s; }
+
+    .astral-card {
+      background: var(--c-bg-2);
+      border: 1px solid var(--c-border);
+      padding: var(--gap-lg);
+      border-radius: 2px;
+      position: relative;
+    }
+
+    .astral-card::before {
+      content: '✦';
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      color: var(--c-accent-rose);
+      font-size: 1.2rem;
+    }
+
+    .grid-trio {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--gap-md);
+      margin-top: var(--gap-md);
+    }
+
+    .trio-item {
+      padding: var(--gap-md);
+      border: 1px solid var(--c-border);
+      text-align: center;
+    }
+
+    .trio-label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      color: var(--c-accent-blue);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .trio-value {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      color: var(--c-text);
+    }
+
+    .quote-box {
+      border-left: 2px solid var(--c-accent-prune);
+      padding-left: var(--gap-md);
+      margin: var(--gap-lg) 0;
+      font-style: italic;
+      color: var(--c-text-muted);
+    }
+
+    .node-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--c-border);
+      margin-top: var(--gap-md);
+    }
+
+    .node-item {
+      background: var(--c-bg);
+      padding: var(--gap-md);
+    }
+
+    .node-title {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--c-accent-rose);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      margin-bottom: var(--gap-md);
+      color: var(--c-text);
+    }
+
+    .badge-stellium {
+      display: inline-block;
+      padding: 2px 8px;
+      background: var(--c-accent-scorpio);
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      color: white;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <!-- La sidebar sera injectée ici par ton script nav.js -->
+    
+    <main class="main">
+      <header class="page-header">
+        <p class="page-header__eyebrow">guide de style astral</p>
+        <h1 class="page-header__title">Soliestrah</h1>
+        <p class="page-header__count">28 décembre 1994 · 13</p>
+      </header>
+
+      <!-- Navigation Interne Rapide -->
+      <nav class="filters" style="position: sticky; top: 0; z-index: 10; background: var(--c-bg); border-bottom: 1px solid var(--c-border);">
+        <div class="filter-group">
+          <div class="filter-group__tags">
+            <a href="#charte" class="filter-tag">01. Charte</a>
+            <a href="#vocation" class="filter-tag">02. Vocation</a>
+            <a href="#chemin" class="filter-tag">03. Chemin Karmique</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="astral-container">
+        
+        <!-- SECTION 1 : CHARTE -->
+        <section id="charte" class="astral-section">
+          <h2>Charte Natale</h2>
+          <div class="astral-card">
+            <div class="badge-stellium">STELLIUM MAISON V — SCORPION</div>
+            <p class="card__desc">Lune · Vénus · Jupiter · Pluton · Nœud Nord. L'amour, la créativité et l'expression de soi sont au centre du destin.</p>
+            
+            <div class="grid-trio">
+              <div class="trio-item">
+                <span class="trio-label">Soleil</span>
+                <span class="trio-value">Capricorne</span>
+              </div>
+              <div class="trio-item">
+                <span class="trio-label">Lune</span>
+                <span class="trio-value">Scorpion</span>
+              </div>
+              <div class="trio-item">
+                <span class="trio-label">Ascendant</span>
+                <span class="trio-value">Cancer</span>
+              </div>
+            </div>
+
+            <div style="margin-top: 2rem; font-family: var(--font-mono); font-size: 0.7rem; color: var(--c-text-muted);">
+              <p>• Dominante : Scorpion / Eau + Terre</p>
+              <p>• Énergie : 90% Féminine (monde intérieur riche)</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 2 : VOCATION -->
+        <section id="vocation" class="astral-section">
+          <h2>MC Bélier · Vocation</h2>
+          <div class="astral-card">
+            <p class="card__desc">Tu es faite pour être pionnière, initiatrice, visible de façon audacieuse et singulière.</p>
+            <div class="quote-box">
+              "Vivre ton MC Bélier à fond, c'est arrêter d'attendre d'être prête et construire quelque chose qui porte ton nom."
+            </div>
+            <ul style="list-style: none; font-family: var(--font-body); line-height: 1.8;">
+              <li><strong style="color: var(--c-accent-blue);">Mercure Capricorne VI :</strong> Structure la matière brute émotionnelle.</li>
+              <li><strong style="color: var(--c-accent-blue);">Mars Vierge II :</strong> Transforme l'intention en action soignée.</li>
+              <li><strong style="color: var(--c-accent-blue);">Saturne Poissons VIII :</strong> Donne de la densité et de la profondeur.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- SECTION 3 : CHEMIN -->
+        <section id="chemin" class="astral-section">
+          <h2>Chemin Karmique</h2>
+          <div class="astral-card">
+            <p class="card__desc">Le passage du confort collectif à l'expression singulière de l'âme.</p>
+            
+            <div class="node-box">
+              <div class="node-item">
+                <span class="node-title">Nœud Sud (Passé)</span>
+                <p style="font-size: 0.85rem;">Taureau Maison XI : Sécurité du groupe, zone de confort, peur de la transformation.</p>
+              </div>
+              <div class="node-item" style="border-left: 1px solid var(--c-border);">
+                <span class="node-title">Nœud Nord (Futur)</span>
+                <p style="font-size: 0.85rem;">Scorpion Maison V : Créer sans destination, accepter la vulnérabilité, faire confiance à ses obsessions.</p>
+              </div>
+            </div>
+
+            <div class="quote-box" style="border-color: var(--c-accent-rose);">
+              "Tu es déjà sur ton chemin — construire un espace numérique qui te ressemble, apprendre à coder pour être autonome."
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="scripts/nav.js"></script>
+</body>
+</html>
