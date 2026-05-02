@@ -286,10 +286,11 @@ document.addEventListener(`DOMContentLoaded`, () => {
     document.body.classList.remove(`panel-open`);
   }
 
-  grid.addEventListener(`click`, e => {
-    const title = e.target.closest(`.card__title`);
-    if (!title) return;
-    const card  = title.closest(`.card`);
+grid.addEventListener('click', e => {
+    // On cherche si on a cliqué sur la carte ou un de ses enfants
+    const card = e.target.closest('.card');
+    if (!card) return;
+    
     openPanel(Number(card.dataset.id));
   });
 
