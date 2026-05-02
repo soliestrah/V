@@ -61,7 +61,7 @@ const FILTER_GROUPS = [
 // STATE
 // ============================================================
 let taches = [];
-let activeFilters = { statut: 'all', nature: 'all' };
+let activeFilters = { statut_atelier: 'all', nature_atelier: 'all' };
 let editingId = null;
 
 // ============================================================
@@ -79,7 +79,11 @@ async function createTache(data) {
     headers: api.headers,
     body: JSON.stringify(data)
   });
-  if (!res.ok) throw new Error('Erreur création');
+  if (!res.ok) {
+    const err = await res.json();
+    console.error('Supabase error:', err);
+    throw new Error('Erreur création');
+  }
   const json = await res.json();
   return json[0];
 }
@@ -90,7 +94,11 @@ async function updateTache(id, data) {
     headers: api.headers,
     body: JSON.stringify(data)
   });
-  if (!res.ok) throw new Error('Erreur mise à jour');
+  if (!res.ok) {
+    const err = await res.json();
+    console.error('Supabase error:', err);
+    throw new Error('Erreur mise à jour');
+  }
   const json = await res.json();
   return json[0];
 }
@@ -117,8 +125,8 @@ function renderCards() {
   const counter = document.querySelector('.js-count');
 
   const filtered = taches.filter(t => {
-    const okStatut = activeFilters.statut === 'all' || t.statut === activeFilters.statut;
-    const okNature = activeFilters.nature === 'all' || t.nature === activeFilters.nature;
+    const okStatut = activeFilters.statut_atelier === 'all' || t.statut_atelier === activeFilters.statut_atelier;
+    const okNature = activeFilters.nature_atelier === 'all' || t.nature_atelier === activeFilters.nature_atelier;
     return okStatut && okNature;
   });
 
@@ -126,12 +134,12 @@ function renderCards() {
   empty.classList.toggle('visible', filtered.length === 0);
 
   grid.innerHTML = filtered.map(t => {
-    const statutObj = STATUTS.find(s => s.value === t.statut) || { label: t.statut };
-    const natureObj = NATURES.find(n => n.value === t.nature) || { label: t.nature };
+    const statutObj = STATUTS.find(s => s.value === t.statut_atelier) || { label: t.statut_atelier || '—' };
+    const natureObj = NATURES.find(n => n.value === t.nature_atelier) || { label: t.nature_atelier || '—' };
     return `
       <article class="card" data-id="${t.id}">
         <div class="card__header">
-          <h3 class="card__title">${t.title_atelier}</h3>
+          <h3 class="card__title">${t.title_atelier || ''}</h3>
           <div class="card__actions">
             <button class="card__btn card__btn--edit" data-id="${t.id}" aria-label="Modifier">✎</button>
             <button class="card__btn card__btn--delete" data-id="${t.id}" aria-label="Supprimer">✕</button>
@@ -139,11 +147,11 @@ function renderCards() {
         </div>
         ${t.description_atelier ? `<p class="card__desc">${t.description_atelier}</p>` : ''}
         ${t.lien_atelier ? `<a class="card__link" href="${t.lien_atelier}" target="_blank" rel="noopener">↗ lien</a>` : ''}
-        ${t.nature_atelier === 'crochet' && t.temps_passe ? `<p class="card__temps">⏱ ${t.time_atelier}</p>` : ''}
+        ${t.nature_atelier === 'crochet' && t.time_atelier ? `<p class="card__temps">⏱ ${t.time_atelier}</p>` : ''}
         <div class="card__meta">
           <div class="card__tags">
-            <span class="card__tag card__tag--nature">${natureObj.label}</span>
-            <span class="card__tag card__tag--statut card__tag--${t.statut_atelier}">${statutObj.label}</span>
+            ${t.nature_atelier ? `<span class="card__tag card__tag--nature">${natureObj.label}</span>` : ''}
+            ${t.statut_atelier ? `<span class="card__tag card__tag--statut card__tag--${t.statut_atelier}">${statutObj.label}</span>` : ''}
           </div>
           <span class="card__status">— ${formatDate(t.created_at)}</span>
         </div>
@@ -171,7 +179,7 @@ function renderFilters() {
 }
 
 // ============================================================
-// FORM OVERLAY
+// FORM
 // ============================================================
 function buildFormHTML(tache = null) {
   const isEdit = !!tache;
@@ -180,44 +188,78 @@ function buildFormHTML(tache = null) {
     <h2 class="panel__title">${isEdit ? 'modifier la tâche' : 'nouvelle tâche'}</h2>
 
     <form id="tache-form" class="tache-form">
+
       <div class="form-field">
         <label class="form-label">titre *</label>
-        <input class="form-input" type="text" name="title" required value="${isEdit ? tache.title : ''}" placeholder="Nom de la tâche">
+        <input
+          class="form-input"
+          type="text"
+          name="title_atelier"
+          required
+          value="${isEdit ? (tache.title_atelier || '') : ''}"
+          placeholder="Nom de la tâche"
+        >
       </div>
 
       <div class="form-field">
         <label class="form-label">nature</label>
         <div class="form-select-group">
           ${NATURES.map(n => `
-            <button type="button" class="form-select-btn${isEdit && tache.nature === n.value ? ' active' : ''}" data-name="nature" data-value="${n.value}">${n.label}</button>
+            <button
+              type="button"
+              class="form-select-btn${isEdit && tache.nature_atelier === n.value ? ' active' : ''}"
+              data-name="nature_atelier"
+              data-value="${n.value}"
+            >${n.label}</button>
           `).join('')}
         </div>
-        <input type="hidden" name="nature" value="${isEdit ? (tache.nature || '') : ''}">
+        <input type="hidden" name="nature_atelier" value="${isEdit ? (tache.nature_atelier || '') : ''}">
       </div>
 
       <div class="form-field">
         <label class="form-label">statut</label>
         <div class="form-select-group">
           ${STATUTS.map(s => `
-            <button type="button" class="form-select-btn${(!isEdit && s.value === 'a-faire') || (isEdit && tache.statut === s.value) ? ' active' : ''}" data-name="statut" data-value="${s.value}">${s.label}</button>
+            <button
+              type="button"
+              class="form-select-btn${(!isEdit && s.value === 'a-faire') || (isEdit && tache.statut_atelier === s.value) ? ' active' : ''}"
+              data-name="statut_atelier"
+              data-value="${s.value}"
+            >${s.label}</button>
           `).join('')}
         </div>
-        <input type="hidden" name="statut" value="${isEdit ? (tache.statut || 'a-faire') : 'a-faire'}">
+        <input type="hidden" name="statut_atelier" value="${isEdit ? (tache.statut_atelier || 'a-faire') : 'a-faire'}">
       </div>
 
-      <div class="form-field" id="field-temps" style="display:${isEdit && tache.nature === 'crochet' ? 'block' : 'none'}">
+      <div class="form-field" id="field-temps" style="display:${isEdit && tache.nature_atelier === 'crochet' ? 'block' : 'none'}">
         <label class="form-label">temps passé</label>
-        <input class="form-input" type="text" name="temps_passe" value="${isEdit && tache.temps_passe ? tache.temps_passe : ''}" placeholder="ex : 2h30, 3 séances…">
+        <input
+          class="form-input"
+          type="text"
+          name="time_atelier"
+          value="${isEdit && tache.time_atelier ? tache.time_atelier : ''}"
+          placeholder="ex : 2h30, 3 séances…"
+        >
       </div>
 
       <div class="form-field">
         <label class="form-label">description</label>
-        <textarea class="form-input form-textarea" name="description" placeholder="Détails, notes…">${isEdit ? (tache.description || '') : ''}</textarea>
+        <textarea
+          class="form-input form-textarea"
+          name="description_atelier"
+          placeholder="Détails, notes…"
+        >${isEdit ? (tache.description_atelier || '') : ''}</textarea>
       </div>
 
       <div class="form-field">
         <label class="form-label">lien</label>
-        <input class="form-input" type="url" name="lien" value="${isEdit ? (tache.lien || '') : ''}" placeholder="https://…">
+        <input
+          class="form-input"
+          type="url"
+          name="lien_atelier"
+          value="${isEdit ? (tache.lien_atelier || '') : ''}"
+          placeholder="https://…"
+        >
       </div>
 
       <div class="form-actions">
@@ -232,17 +274,16 @@ function buildFormHTML(tache = null) {
 
 function openForm(tache = null) {
   editingId = tache ? tache.id : null;
-  const panel = document.getElementById('panel');
+  const panel    = document.getElementById('panel');
   const panelInner = document.getElementById('panel-inner');
-  const overlay = document.getElementById('panel-overlay');
+  const overlay  = document.getElementById('panel-overlay');
 
   panelInner.innerHTML = buildFormHTML(tache);
-
   panel.classList.add('open');
   overlay.classList.add('visible');
   document.body.classList.add('panel-open');
 
-  // Select buttons logic
+  // Sélecteurs cliquables
   panelInner.querySelectorAll('.form-select-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const name = btn.dataset.name;
@@ -250,9 +291,10 @@ function openForm(tache = null) {
       btn.classList.add('active');
       panelInner.querySelector(`input[name="${name}"]`).value = btn.dataset.value;
 
-      // Show/hide temps_passe field
-      if (name === 'nature') {
-        document.getElementById('field-temps').style.display = btn.dataset.value === 'crochet' ? 'block' : 'none';
+      // Afficher/masquer le champ temps si nature = crochet
+      if (name === 'nature_atelier') {
+        document.getElementById('field-temps').style.display =
+          btn.dataset.value === 'crochet' ? 'block' : 'none';
       }
     });
   });
@@ -263,13 +305,15 @@ function openForm(tache = null) {
   document.getElementById('tache-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
+    const nature = formData.get('nature_atelier') || null;
+
     const data = {
-      title: formData.get('title'),
-      description: formData.get('description') || null,
-      lien: formData.get('lien') || null,
-      statut: formData.get('statut') || 'a-faire',
-      nature: formData.get('nature') || null,
-      temps_passe: formData.get('nature') === 'crochet' ? (formData.get('temps_passe') || null) : null,
+      title_atelier:       formData.get('title_atelier'),
+      description_atelier: formData.get('description_atelier') || null,
+      lien_atelier:        formData.get('lien_atelier') || null,
+      statut_atelier:      formData.get('statut_atelier') || 'a-faire',
+      nature_atelier:      nature,
+      time_atelier:        nature === 'crochet' ? (formData.get('time_atelier') || null) : null,
     };
 
     const submitBtn = e.target.querySelector('[type="submit"]');
@@ -297,7 +341,7 @@ function openForm(tache = null) {
 }
 
 function closeForm() {
-  const panel = document.getElementById('panel');
+  const panel   = document.getElementById('panel');
   const overlay = document.getElementById('panel-overlay');
   panel.classList.remove('open');
   overlay.classList.remove('visible');
@@ -310,11 +354,11 @@ function closeForm() {
 // ============================================================
 document.addEventListener('DOMContentLoaded', async () => {
   document.querySelector('.page-header__eyebrow').textContent = PAGE.eyebrow;
-  document.querySelector('.page-header__title').textContent = PAGE.title;
+  document.querySelector('.page-header__title').textContent   = PAGE.title;
 
   renderFilters();
 
-  // Filters logic
+  // Filtres
   document.querySelector('.filters').addEventListener('click', e => {
     const btn = e.target.closest('.filter-tag');
     if (!btn) return;
@@ -325,12 +369,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderCards();
   });
 
-  // New task button
+  // Bouton nouvelle tâche
   document.getElementById('btn-new').addEventListener('click', () => openForm());
 
-  // Grid clicks (edit / delete)
+  // Clicks sur la grille (edit / delete)
   document.getElementById('grid').addEventListener('click', async e => {
-    const editBtn = e.target.closest('.card__btn--edit');
+    const editBtn   = e.target.closest('.card__btn--edit');
     const deleteBtn = e.target.closest('.card__btn--delete');
 
     if (editBtn) {
@@ -352,11 +396,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
-  // Overlay click closes form
+  // Fermer panel
   document.getElementById('panel-overlay').addEventListener('click', closeForm);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeForm(); });
 
-  // Load data
+  // Chargement initial
   const grid = document.getElementById('grid');
   grid.innerHTML = `<p class="loading">chargement…</p>`;
   try {
