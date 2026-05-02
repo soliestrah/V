@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <li class="nav__item"><a href="garden.html"><span class="nav__index">01</span>jardin</a></li>
           <li class="nav__item"><a href="recettes.html"><span class="nav__index">02</span>recettes</a></li>
           <li class="nav__item"><a href="convoitises.html"><span class="nav__index">03</span>convoitises</a></li>
-          <li class="nav__item"><a href="section-4.html"><span class="nav__index">04</span>section 4</a></li>
+          <li class="nav__item"><a href="atelier.html"><span class="nav__index">04</span>atelier</a></li>
         </ul>
       </nav>
 
