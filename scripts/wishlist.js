@@ -1,7 +1,9 @@
 // ============================================================
 // CONFIG SUPABASE
 // ============================================================
-const SUPABASE_URL = 'https://wenkojnlclbyuzgmtyyw.supabase.co/rest/v1/';
+const SUPABASE_URL = 'https://wenkojnlclbyuzgmtyyw.supabase.co';
+
+url: `${SUPABASE_URL}/rest/v1/${TABLE}`
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indlbmtvam5sY2xieXV6Z210eXl3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3NjQ3MjgsImV4cCI6MjA5MjM0MDcyOH0.xQMV3zDGrrgtnNrlj0z090tWmLBAsDP8KsF4Wk2Otx0';
 const TABLE = 'v_wishlist';
 
@@ -32,7 +34,7 @@ const NATURES = [
   { value: 'haut',        label: 'haut' },
   { value: 'bas',     label: 'bas' },
   { value: 'chaussure',      label: 'chaussure' },
-  { value: 'veste',     label: 'vest' },
+  { value: 'veste',     label: 'veste' },
   { value: 'gilet', label: 'gilet' },
   { value: 'pull',    label: 'pull' },
   { value: 'autre',       label: 'autre' },
@@ -294,7 +296,7 @@ function openForm(tache = null) {
       titre_wishlist:       formData.get('titre_wishlist'),
       prix_wishlist: formData.get('prix_wishlist') || null,
       lien_wishlist:        formData.get('lien_wishlist') || null,
-      statut_wishlist:      formData.get('statut_wishlist') || 'a-faire',
+      statut_wishlist:      formData.get('statut_wishlist') || 'a-acheter',
       nature_wishlist:      nature,
       boutique_wishlist:        formData.get('boutique_wishlist') || null,
     };
