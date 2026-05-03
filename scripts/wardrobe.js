@@ -79,10 +79,10 @@ const SECTIONS = [
           },
         ],
       },
-
-      {
-        type:    'text',
-        title: 'entretien · rituel capillaire',
+            {
+        type:  'section-header',
+        title: 'entretien<br><em>rituel capillaire</em>',
+        badge: 'cheveux de rêves',
       },
       {
         type: 'support',
@@ -230,10 +230,10 @@ const SECTIONS = [
           },
         ],
       },
-
-      {
-        type:    'text',
-        title: 'pierres à explorer · résonances astrologiques',
+         {
+        type:  'section-header',
+        title: 'pierres<br><em>à explorer</em>',
+        badge: 'résonances astrologiques',
       },
       {
         type: 'support',
