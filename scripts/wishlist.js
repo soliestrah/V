@@ -20,7 +20,7 @@ const api = {
 // ============================================================
 const PAGE = {
   eyebrow: 'antichambreV · wishlist',
-  title: 'wishlist',
+  titre: 'wishlist',
 };
 
 const STATUTS = [
@@ -139,7 +139,7 @@ function renderCards() {
     return `
       <article class="card" data-id="${t.id}">
         <div class="card__header">
-          <h3 class="card__title">${t.titre_wishlist || ''}</h3>
+          <h3 class="card__titre">${t.titre_wishlist || ''}</h3>
           <div class="card__actions">
             <button class="card__btn card__btn--edit" data-id="${t.id}" aria-label="Modifier">✎</button>
             <button class="card__btn card__btn--delete" data-id="${t.id}" aria-label="Supprimer">✕</button>
@@ -185,7 +185,7 @@ function buildFormHTML(tache = null) {
   const isEdit = !!tache;
   return `
     <button class="panel__close" id="form-close" aria-label="Fermer">✕</button>
-    <h2 class="panel__title">${isEdit ? 'modifier la tâche' : 'nouvelle tâche'}</h2>
+    <h2 class="panel__titre">${isEdit ? 'modifier la tâche' : 'nouvelle tâche'}</h2>
 
     <form id="tache-form" class="tache-form">
 
@@ -194,7 +194,7 @@ function buildFormHTML(tache = null) {
         <input
           class="form-input"
           type="text"
-          name="title_wishlist"
+          name="titre_wishlist"
           required
           value="${isEdit ? (tache.titre_wishlist || '') : ''}"
           placeholder="Nom de la tâche"
@@ -291,7 +291,7 @@ function openForm(tache = null) {
     const nature = formData.get('nature_wishlist') || null;
 
     const data = {
-      title_wishlist:       formData.get('title_wishlist'),
+      titre_wishlist:       formData.get('titre_wishlist'),
       prix_wishlist: formData.get('prix_wishlist') || null,
       lien_wishlist:        formData.get('lien_wishlist') || null,
       statut_wishlist:      formData.get('statut_wishlist') || 'a-faire',
@@ -337,7 +337,7 @@ function closeForm() {
 // ============================================================
 document.addEventListener('DOMContentLoaded', async () => {
   document.querySelector('.page-header__eyebrow').textContent = PAGE.eyebrow;
-  document.querySelector('.page-header__title').textContent   = PAGE.title;
+  document.querySelector('.page-header__titre').textContent   = PAGE.titre;
 
   renderFilters();
 
