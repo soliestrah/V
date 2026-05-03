@@ -233,7 +233,7 @@ const SECTIONS = [
 
       {
         type:    'text',
-        content: 'pierres à explorer · résonances astrologiques',
+        title: 'pierres à explorer · résonances astrologiques',
       },
       {
         type: 'support',
