@@ -4,7 +4,7 @@
 
 const PAGE = {
   eyebrow: `antichambreV · ce qui pousse dans le jardin`,
-  title: `JARDIN`,
+  title: `jardin`,
 };
 
 // Groupes de filtres
