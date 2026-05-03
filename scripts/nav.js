@@ -19,8 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <li class="nav__item"><a href="atelier.html"><span class="nav__index">04</span>atelier</a></li>
           <li class="nav__item"><a href="medecin.html"><span class="nav__index">05</span>medecin</a></li>
           <li class="nav__item"><a href="astral.html"><span class="nav__index">06</span>astrologie</a></li>
-          <li class="nav__item"><a href="wardrobe.html"><span class="nav__index">06</span>wardrobe</a></li>
-          <li class="nav__item"><a href="template2.html"><span class="nav__index">06</span>scroll</a></li> </ul>
+          <li class="nav__item"><a href="wardrobe.html"><span class="nav__index">06</span>wardrobe</a></li></ul>
       </nav>
 
       <footer class="sidebar__footer">
