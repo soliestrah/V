@@ -20,7 +20,7 @@ const api = {
 // ============================================================
 const PAGE = {
   eyebrow: 'antichambreV · atelier',
-  title: 'ATELIER',
+  title: 'atelier',
 };
 
 const STATUTS = [
