@@ -82,7 +82,7 @@ const SECTIONS = [
 
       {
         type:    'text',
-        content: 'entretien · rituel capillaire',
+        title: 'entretien · rituel capillaire',
       },
       {
         type: 'support',
