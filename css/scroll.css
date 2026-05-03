@@ -718,3 +718,9 @@ html { scroll-behavior: smooth; }
   .swatch-grid    { grid-template-columns: 1fr; }
   .capsule-grid   { grid-template-columns: 1fr; }
 }
+
+/* ── SWATCHES COULEURS CHEVEUX ── */
+.swatch--cherry   { background: linear-gradient(to right, #3d1a2a, #7a2d3e, #a84060); }
+.swatch--cendre   { background: linear-gradient(to right, #2a2420, #4a3d3a, #6e5e58); }
+.swatch--balayage { background: linear-gradient(to right, #3a2a20, #5e4030, #8a6a48, #b89070); }
+.swatch--roux     { background: linear-gradient(to right, #6a2a2a, #9a3a30, #c05040, #a03030); }
