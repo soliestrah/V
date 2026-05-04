@@ -330,7 +330,7 @@ editingId = null;
 // ============================================================
 document.addEventListener(‘DOMContentLoaded’, async () => {
 document.querySelector(’.page-header__eyebrow’).textContent = PAGE.eyebrow;
-document.querySelector(’.page-header__titre’).textContent   = PAGE.titre;
+document.querySelector(’.page-header__titre’).textContent   = PAGE.title;
 
 renderFilters();
 
