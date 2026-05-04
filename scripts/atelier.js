@@ -37,6 +37,7 @@ const NATURES = [
   { value: 'iceolie',     label: 'iceolie' },
   { value: 'inspiration', label: 'inspiration' },
   { value: 'learning',    label: 'learning' },
+  { value: 'livre',    label: 'livre' },
   { value: 'autre',       label: 'autre' },
 ];
 
