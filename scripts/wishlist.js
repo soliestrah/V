@@ -46,7 +46,7 @@ id: ‘statut_wishlist’,
 label: ‘statut’,
 filters: [
 { value: ‘all’, label: ‘tout’ },
-…STATUTS
+...STATUTS
 ]
 },
 {
@@ -54,7 +54,7 @@ id: ‘nature_wishlist’,
 label: ‘nature’,
 filters: [
 { value: ‘all’, label: ‘tout’ },
-…NATURES
+...NATURES
 ]
 },
 ];
@@ -330,7 +330,7 @@ editingId = null;
 // ============================================================
 document.addEventListener(‘DOMContentLoaded’, async () => {
 document.querySelector(’.page-header__eyebrow’).textContent = PAGE.eyebrow;
-document.querySelector(’.page-header__titre’).textContent   = PAGE.titre;
+document.querySelector(’.page-header__title’).textContent   = PAGE.titre;
 
 renderFilters();
 
@@ -347,8 +347,8 @@ renderCards();
 document.getElementById(‘btn-new’).addEventListener(‘click’, () => openForm());
 
 document.addEventListener(‘click’, async e => {
-const editBtn   = e.target.closest(’.card__btn–edit’);
-const deleteBtn = e.target.closest(’.card__btn–delete’);
+const editBtn   = e.target.closest(’.card__btn–-edit’);
+const deleteBtn = e.target.closest(’.card__btn-–delete’);
 
 ```
 if (editBtn) {
