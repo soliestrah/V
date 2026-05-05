@@ -149,8 +149,80 @@ const CARDS = [
     status: `Petroselinum crispum`,
     links: []
   },
-          {
+     {
     id: 13,
+    title: `Pavot`,
+    desc: `Le pavot de jardin (Papaver somniferum) est riche en alcaloïdes (morphine, codéine en très faibles quantités dans les variétés ornementales). Les graines sont comestibles et sans danger. En phytothérapie traditionnelle : propriétés légèrement sédatives et antitussives via les pétales séchés.`,
+    content: `Récolter les graines quand la capsule est sèche et brune. Laisser quelques capsules en place pour la ressemence naturelle. Les pétales se récoltent dès l'ouverture.`,
+    tags: [`ouest`, `est`, `deco`],
+    status: `Papaver somniferum`,
+    links: []
+  },
+  {
+    id: 14,
+    title: `Monnaie du pape`,
+    desc: `Appelée aussi lunaire vivace, ses silicules argentées persistent tout l'hiver et sont très décoratives. Plante mellifère appréciée des pollinisateurs. Les jeunes feuilles sont comestibles, au goût légèrement piquant rappelant la roquette.`,
+    content: `Récolter les jeunes pousses au printemps. Pour la déco, couper les tiges entières quand les silicules sont encore vertes et laisser sécher à l'ombre, tête en bas.`,
+    tags: [`est`, `deco`],
+    status: `Lunaria annua`,
+    links: []
+  },
+  {
+    id: 15,
+    title: `Grand piment vert long`,
+    desc: `Piment doux à très faible teneur en capsaïcine. Riche en vitamine C (encore plus que le poivron), vitamine A et antioxydants. La capsaïcine, même à faible dose, a des propriétés anti-inflammatoires et stimule la digestion.`,
+    content: `Récolter quand le fruit est bien ferme et vert brillant. Laisser quelques fruits rougir sur le plant pour la semence. Arrosage régulier mais sans excès pour éviter la pourriture du collet.`,
+    tags: [`ouest`, `fruits`],
+    status: `Capsicum annuum`,
+    links: []
+  },
+  {
+    id: 16,
+    title: `Tomate cerise`,
+    desc: `Concentration maximale en lycopène (antioxydant puissant), vitamine C et glutamate naturel. Le lycopène est mieux assimilé après cuisson avec un corps gras. Variété très productive, résistante à la sécheresse une fois bien établie.`,
+    content: `Pincer les gourmands pour concentrer la production. Récolter à pleine maturité, quand le fruit se détache facilement. Laisser quelques fruits tomber pour une ressemence spontanée d'une année sur l'autre.`,
+    tags: [`ouest`, `fruits`],
+    status: `Solanum lycopersicum var. cerasiforme`,
+    links: []
+  },
+  {
+    id: 17,
+    title: `Œillet d'Inde`,
+    desc: `Plante compagne par excellence : ses racines sécrètent des thiophènes qui repoussent les nématodes, et son odeur éloigne pucerons et aleurodes. Les pétales sont comestibles, légèrement citronnés. En phytothérapie : antiseptique cutané, antifongique doux.`,
+    content: `Planter en bordure de potager ou entre les tomates et poivrons. Couper les fleurs fanées régulièrement pour prolonger la floraison jusqu'aux gelées. Les pétales séchés s'utilisent en infusion ou en macérât huileux.`,
+    tags: [`ouest`, `deco`],
+    status: `Tagetes patula`,
+    links: []
+  },
+  {
+    id: 18,
+    title: `Rose`,
+    desc: `Les pétales de rosa gallica et rosa damascena sont utilisés en herboristerie depuis l'Antiquité : astringents, anti-inflammatoires, toniques cutanés. Très riches en vitamine C (surtout dans les cynorhodons). L'eau de rose est calmante pour les muqueuses et la peau sensible.`,
+    content: `Récolter les pétales tôt le matin avant l'évaporation des huiles essentielles. Les cynorhodons se récoltent après les premières gelées. Couper les fleurs fanées pour stimuler la remontée.`,
+    tags: [`ouest`, `deco`],
+    status: `Rosa gallica`,
+    links: []
+  },
+  {
+    id: 19,
+    title: `Pensée`,
+    desc: `Riche en rutine, salicylates et mucilages. En phytothérapie : dépurative, émolliente, utilisée traditionnellement pour les affections cutanées (eczéma, croûtes de lait). Les fleurs entières sont comestibles et décoratives en salade ou cristallisées.`,
+    content: `Supprimer régulièrement les fleurs fanées. Récolter les fleurs fraîchement ouvertes pour usage culinaire ou séchage. Préfère les températures fraîches — tend à monter en graine et s'épuiser avec la chaleur.`,
+    tags: [`est`, `deco`],
+    status: `Viola tricolor`,
+    links: []
+  },
+  {
+    id: 20,
+    title: `Souci officinal`,
+    desc: `Une des plantes médicinales les plus documentées : les fleurs contiennent des flavonoïdes, des triterpènes et des caroténoïdes à l'action cicatrisante, anti-inflammatoire et antifongique marquée. Utilisé en macérât huileux pour la peau, en infusion pour les muqueuses digestives. Fleurs comestibles.`,
+    content: `Récolter les capitules dès l'ouverture complète, de préférence le matin par temps sec. Sécher rapidement à l'ombre pour préserver les caroténoïdes. Plante compagne efficace contre les pucerons noirs de la fève.`,
+    tags: [`ouest`, `est`, `deco`],
+    status: `Calendula officinalis`,
+    links: []
+  },
+  {
+    id: 21,
     title: `carte`,
     desc: `Tag`,
     content: `Notes`,
