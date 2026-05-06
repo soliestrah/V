@@ -167,8 +167,6 @@ const isEdit = !!tache;
 return `
 <button class="panel__close" id="form-close" aria-label="Fermer">✕</button>
 <h2 class="panel__titre">${isEdit ? ‘modifier la tâche’ : ‘nouvelle tâche’}</h2>
-
-```
 <form id="tache-form" class="tache-form">
 
   <div class="form-field">
