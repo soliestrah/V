@@ -1,11 +1,9 @@
-// ===========================================================
+// ============================================================
 // CONFIG SUPABASE
 // ============================================================
 const SUPABASE_URL = ‘https://wenkojnlclbyuzgmtyyw.supabase.co’;
 const SUPABASE_KEY = ‘eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indlbmtvam5sY2xieXV6Z210eXl3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3NjQ3MjgsImV4cCI6MjA5MjM0MDcyOH0.xQMV3zDGrrgtnNrlj0z090tWmLBAsDP8KsF4Wk2Otx0’;
 const TABLE = ‘v_wishlist’;
-
-// FIX 1 : la ligne “url: …” orpheline a été supprimée
 
 const api = {
 headers: {
@@ -27,7 +25,7 @@ titre: ‘wishlist’,
 
 const STATUTS = [
 { value: ‘a-acheter’, label: ‘à acheter’ },
-{ value: ‘acheté’,    label: ‘acheté’ },   // FIX 2 : label corrigé (‘acheter’ → ‘acheté’)
+{ value: ‘acheté’,    label: ‘acheté’ },
 ];
 
 const NATURES = [
@@ -44,18 +42,12 @@ const FILTER_GROUPS = [
 {
 id: ‘statut_wishlist’,
 label: ‘statut’,
-filters: [
-{ value: ‘all’, label: ‘tout’ },
-...STATUTS
-]
+filters: [{ value: ‘all’, label: ‘tout’ }, …STATUTS]
 },
 {
 id: ‘nature_wishlist’,
 label: ‘nature’,
-filters: [
-{ value: ‘all’, label: ‘tout’ },
-...NATURES
-]
+filters: [{ value: ‘all’, label: ‘tout’ }, …NATURES]
 },
 ];
 
@@ -70,16 +62,11 @@ let editingId = null;
 // API CALLS
 // ============================================================
 async function fetchTaches() {
-  const url = `${api.url}?order=created_at.desc`;
-  console.log('fetching:', url);
-  const res = await fetch(url, { headers: api.headers });
-  console.log('status:', res.status);
-  const json = await res.json();
-  console.log('response:', json);
-  if (!res.ok) throw new Error(JSON.stringify(json));
-  return json;
+const res = await fetch(`${api.url}?order=created_at.desc`, { headers: api.headers });
+const json = await res.json();
+if (!res.ok) throw new Error(JSON.stringify(json));
+return json;
 }
-
 
 async function createTache(data) {
 const res = await fetch(api.url, {
@@ -87,12 +74,8 @@ method: ‘POST’,
 headers: api.headers,
 body: JSON.stringify(data)
 });
-if (!res.ok) {
-const err = await res.json();
-console.error(‘Supabase error:’, err);
-throw new Error(‘Erreur création’);
-}
 const json = await res.json();
+if (!res.ok) throw new Error(JSON.stringify(json));
 return json[0];
 }
 
@@ -102,12 +85,8 @@ method: ‘PATCH’,
 headers: api.headers,
 body: JSON.stringify(data)
 });
-if (!res.ok) {
-const err = await res.json();
-console.error(‘Supabase error:’, err);
-throw new Error(‘Erreur mise à jour’);
-}
 const json = await res.json();
+if (!res.ok) throw new Error(JSON.stringify(json));
 return json[0];
 }
 
@@ -144,7 +123,7 @@ empty.classList.toggle(‘visible’, filtered.length === 0);
 grid.innerHTML = filtered.map(t => {
 const statutObj = STATUTS.find(s => s.value === t.statut_wishlist) || { label: t.statut_wishlist || ‘—’ };
 const natureObj = NATURES.find(n => n.value === t.nature_wishlist) || { label: t.nature_wishlist || ‘—’ };
-return `<article class="card" data-id="${t.id}"> <div class="card__header"> <h3 class="card__title">${t.titre_wishlist || ''}</h3> <div class="card__actions"> <button class="card__btn card__btn--edit" data-id="${t.id}" aria-label="Modifier">✎</button> <button class="card__btn card__btn--delete" data-id="${t.id}" aria-label="Supprimer">✕</button> </div> </div> ${t.prix_wishlist ?`<p class="card__desc">${t.prix_wishlist}</p>`: ''} ${t.lien_wishlist ?`<a class="card__link" href="${t.lien_wishlist}" target="_blank" rel="noopener">↗ lien</a>`: ''} <!-- FIX 3 : bloc card__temps supprimé (doublonnait nature déjà dans les tags) --> <div class="card__meta"> <div class="card__tags"> ${t.nature_wishlist ?`<span class="card__tag card__tag--nature">${natureObj.label}</span>`: ''} ${t.statut_wishlist ?`<span class="card__tag card__tag--statut card__tag--${t.statut_wishlist}">${statutObj.label}</span>`: ''} </div> <span class="card__status">— ${formatDate(t.created_at)}</span> </div> </article>`;
+return `<article class="card" data-id="${t.id}"> <div class="card__header"> <h3 class="card__title">${t.titre_wishlist || ''}</h3> <div class="card__actions"> <button class="card__btn card__btn--edit" data-id="${t.id}" aria-label="Modifier">✎</button> <button class="card__btn card__btn--delete" data-id="${t.id}" aria-label="Supprimer">✕</button> </div> </div> ${t.prix_wishlist ?`<p class="card__desc">${t.prix_wishlist}</p>`: ''} ${t.lien_wishlist ?`<a class="card__link" href="${t.lien_wishlist}" target="_blank" rel="noopener">↗ lien</a>`: ''} <div class="card__meta"> <div class="card__tags"> ${t.nature_wishlist ?`<span class="card__tag card__tag--nature">${natureObj.label}</span>`: ''} ${t.statut_wishlist ?`<span class="card__tag card__tag--statut card__tag--${t.statut_wishlist}">${statutObj.label}</span>`: ''} </div> <span class="card__status">— ${formatDate(t.created_at)}</span> </div> </article>`;
 }).join(’’);
 }
 
@@ -166,27 +145,22 @@ function buildFormHTML(tache = null) {
 const isEdit = !!tache;
 return `
 <button class="panel__close" id="form-close" aria-label="Fermer">✕</button>
-<h2 class="panel__titre">${isEdit ? ‘modifier la tâche’ : ‘nouvelle tâche’}</h2>
+<h2 class="panel__titre">${isEdit ? ‘modifier’ : ‘nouvelle tâche’}</h2>
 <form id="tache-form" class="tache-form">
 
+```
   <div class="form-field">
     <label class="form-label">titre *</label>
-    <input
-      class="form-input"
-      type="text"
-      name="titre_wishlist"
-      required
+    <input class="form-input" type="text" name="titre_wishlist" required
       value="${isEdit ? (tache.titre_wishlist || '') : ''}"
-      placeholder="Nom de la tâche"
-    >
+      placeholder="Nom de l'article">
   </div>
 
   <div class="form-field">
     <label class="form-label">nature</label>
     <div class="form-select-group">
       ${NATURES.map(n => `
-        <button
-          type="button"
+        <button type="button"
           class="form-select-btn${isEdit && tache.nature_wishlist === n.value ? ' active' : ''}"
           data-name="nature_wishlist"
           data-value="${n.value}"
@@ -200,8 +174,7 @@ return `
     <label class="form-label">statut</label>
     <div class="form-select-group">
       ${STATUTS.map(s => `
-        <button
-          type="button"
+        <button type="button"
           class="form-select-btn${(!isEdit && s.value === 'a-acheter') || (isEdit && tache.statut_wishlist === s.value) ? ' active' : ''}"
           data-name="statut_wishlist"
           data-value="${s.value}"
@@ -213,34 +186,22 @@ return `
 
   <div class="form-field">
     <label class="form-label">prix</label>
-    <textarea
-      class="form-input form-textarea"
-      name="prix_wishlist"
-      placeholder="Prix, notes…"
-    >${isEdit ? (tache.prix_wishlist || '') : ''}</textarea>
+    <textarea class="form-input form-textarea" name="prix_wishlist"
+      placeholder="Prix, notes…">${isEdit ? (tache.prix_wishlist || '') : ''}</textarea>
   </div>
 
   <div class="form-field">
     <label class="form-label">lien</label>
-    <input
-      class="form-input"
-      type="url"
-      name="lien_wishlist"
+    <input class="form-input" type="url" name="lien_wishlist"
       value="${isEdit ? (tache.lien_wishlist || '') : ''}"
-      placeholder="https://…"
-    >
+      placeholder="https://…">
   </div>
 
-  <!-- FIX 4 : champ boutique_wishlist ajouté pour correspondre au formData.get() -->
   <div class="form-field">
     <label class="form-label">boutique</label>
-    <input
-      class="form-input"
-      type="text"
-      name="boutique_wishlist"
+    <input class="form-input" type="text" name="boutique_wishlist"
       value="${isEdit ? (tache.boutique_wishlist || '') : ''}"
-      placeholder="Nom de la boutique…"
-    >
+      placeholder="Nom de la boutique…">
   </div>
 
   <div class="form-actions">
@@ -282,7 +243,6 @@ panelInner.querySelector(’#form-cancel’).addEventListener(‘click’, close
 panelInner.querySelector(’#tache-form’).addEventListener(‘submit’, async (e) => {
 e.preventDefault();
 const formData = new FormData(e.target);
-const nature = formData.get(‘nature_wishlist’) || null;
 
 ```
 const data = {
@@ -290,7 +250,7 @@ const data = {
   prix_wishlist:     formData.get('prix_wishlist') || null,
   lien_wishlist:     formData.get('lien_wishlist') || null,
   statut_wishlist:   formData.get('statut_wishlist') || 'a-acheter',
-  nature_wishlist:   nature,
+  nature_wishlist:   formData.get('nature_wishlist') || null,
   boutique_wishlist: formData.get('boutique_wishlist') || null,
 };
 
@@ -310,7 +270,7 @@ try {
   renderCards();
 } catch (err) {
   const errEl = panelInner.querySelector('#form-error');
-  errEl.textContent = 'Une erreur est survenue. Réessaie.';
+  errEl.textContent = 'Erreur : ' + err.message;
   errEl.classList.remove('hidden');
   submitBtn.textContent = editingId ? 'enregistrer' : 'ajouter';
   submitBtn.disabled = false;
@@ -351,8 +311,8 @@ renderCards();
 document.getElementById(‘btn-new’).addEventListener(‘click’, () => openForm());
 
 document.addEventListener(‘click’, async e => {
-const editBtn   = e.target.closest(’.card__btn–-edit’);
-const deleteBtn = e.target.closest(’.card__btn-–delete’);
+const editBtn   = e.target.closest(’.card__btn–edit’);
+const deleteBtn = e.target.closest(’.card__btn–delete’);
 
 ```
 if (editBtn) {
@@ -364,7 +324,7 @@ if (editBtn) {
 
 if (deleteBtn) {
   const id = deleteBtn.dataset.id;
-  if (!confirm('Supprimer cette tâche ?')) return;
+  if (!confirm('Supprimer cet article ?')) return;
   try {
     await deleteTache(id);
     taches = taches.filter(t => String(t.id) !== String(id));
@@ -380,12 +340,12 @@ if (deleteBtn) {
 document.getElementById(‘panel-overlay’).addEventListener(‘click’, closeForm);
 document.addEventListener(‘keydown’, e => { if (e.key === ‘Escape’) closeForm(); });
 
-const grid = document.getElementById('grid');
+const grid = document.getElementById(‘grid’);
 grid.innerHTML = `<p class="loading">chargement…</p>`;
 try {
-  taches = await fetchTaches();
-  renderCards();
+taches = await fetchTaches();
+renderCards();
 } catch(err) {
-  grid.innerHTML = `<p class="loading" style="opacity:1;color:#8f5f6b;font-size:0.8rem;padding:2rem;">${err.message}</p>`;
+grid.innerHTML = `<p class="loading" style="opacity:1;color:#8f5f6b;font-size:0.8rem;padding:2rem;">${err.message}</p>`;
 }
 });
