@@ -70,10 +70,16 @@ let editingId = null;
 // API CALLS
 // ============================================================
 async function fetchTaches() {
-const res = await fetch(`${api.url}?order=created_at.desc`, { headers: api.headers });
-if (!res.ok) throw new Error(‘Erreur fetch’);
-return res.json();
+  const url = `${api.url}?order=created_at.desc`;
+  console.log('fetching:', url);
+  const res = await fetch(url, { headers: api.headers });
+  console.log('status:', res.status);
+  const json = await res.json();
+  console.log('response:', json);
+  if (!res.ok) throw new Error(JSON.stringify(json));
+  return json;
 }
+
 
 async function createTache(data) {
 const res = await fetch(api.url, {
@@ -376,12 +382,12 @@ if (deleteBtn) {
 document.getElementById(‘panel-overlay’).addEventListener(‘click’, closeForm);
 document.addEventListener(‘keydown’, e => { if (e.key === ‘Escape’) closeForm(); });
 
-const grid = document.getElementById(‘grid’);
+const grid = document.getElementById('grid');
 grid.innerHTML = `<p class="loading">chargement…</p>`;
 try {
-taches = await fetchTaches();
-renderCards();
-} catch {
-grid.innerHTML = `<p class="loading">erreur de connexion à la base.</p>`;
+  taches = await fetchTaches();
+  renderCards();
+} catch(err) {
+  grid.innerHTML = `<p class="loading" style="opacity:1;color:#8f5f6b;font-size:0.8rem;padding:2rem;">${err.message}</p>`;
 }
 });
