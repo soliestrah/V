@@ -1,9 +1,8 @@
 // ============================================================
 // ANTICHAMBRE V · WISHLIST
 // Supabase : v_wishlist
-// Colonnes : created_at, titre_wishlist, lien_wishlist,
-//            prix_wishlist, boutique_wishlist,
-//            statut_wishlist, nature_wishlist
+// Design system : style.css · section.css · scroll.css
+//                 atelier.css · panel.css · wishlist.css
 // ============================================================
 
 const SUPABASE_URL  = 'https://wenkojnlclbyuzgmtyyw.supabase.co/rest/v1/';
@@ -26,31 +25,13 @@ const STATUT_META = {
   'offert':     { glyph: '♡', cls: 'statut--offert'  },
 };
 
-const PAGE = {
-  title: 'antichambreV · wishlist',
-  hero: {
-    glyph:    '✦ · ✦ · ✦  ·  désirs catalogués',
-    title:    'wish<em>list</em>',
-    dataLines: [
-      'objets convoités · classés · archivés',
-      'statut · nature · boutique',
-      'antichambreV © 2025',
-    ],
-    trio: [
-      { label: 'en attente', glyph: '○', value: '—' },
-      { label: 'acheté',     glyph: '✓', value: '—' },
-      { label: 'offert',     glyph: '♡', value: '—' },
-    ],
-  },
-};
-
 // ── État global ──────────────────────────────────────────────
-let ALL_ITEMS       = [];
-let activeStatut    = null;
-let activeNature    = null;
-let editingId       = null;
+let ALL_ITEMS    = [];
+let activeStatut = null;
+let activeNature = null;
+let editingId    = null;
 
-// ── Helpers Supabase ────────────────────────────────────────
+// ── Supabase helpers ─────────────────────────────────────────
 async function sbFetch(path, opts = {}) {
   const res = await fetch(SUPABASE_URL + path, {
     ...opts,
@@ -67,105 +48,112 @@ async function sbFetch(path, opts = {}) {
   return txt ? JSON.parse(txt) : null;
 }
 
-async function fetchAll() {
-  return sbFetch('v_wishlist?order=created_at.desc');
-}
+const fetchAll    = ()        => sbFetch('v_wishlist?order=created_at.desc');
+const insertItem  = data      => sbFetch('v_wishlist', { method: 'POST', prefer: 'return=representation', body: JSON.stringify(data) });
+const updateItem  = (id, data)=> sbFetch(`v_wishlist?id=eq.${id}`, { method: 'PATCH', prefer: 'return=representation', body: JSON.stringify(data) });
+const deleteItem  = id        => sbFetch(`v_wishlist?id=eq.${id}`, { method: 'DELETE' });
 
-async function insertItem(data) {
-  return sbFetch('v_wishlist', {
-    method:  'POST',
-    prefer:  'return=representation',
-    body:    JSON.stringify(data),
-  });
-}
-
-async function updateItem(id, data) {
-  return sbFetch(`v_wishlist?id=eq.${id}`, {
-    method:  'PATCH',
-    prefer:  'return=representation',
-    body:    JSON.stringify(data),
-  });
-}
-
-async function deleteItem(id) {
-  return sbFetch(`v_wishlist?id=eq.${id}`, { method: 'DELETE' });
-}
-
-// ── Rendu hero trio (compteurs) ──────────────────────────────
+// ── Hero trio (compteurs) ─────────────────────────────────────
 function updateHeroTrio(items) {
   const counts = { 'en attente': 0, 'acheté': 0, 'offert': 0 };
   items.forEach(i => { if (counts[i.statut_wishlist] !== undefined) counts[i.statut_wishlist]++; });
-  const trioValues = document.querySelectorAll('.trio-item__value');
-  const keys = ['en attente', 'acheté', 'offert'];
-  keys.forEach((k, idx) => {
-    if (trioValues[idx]) trioValues[idx].textContent = counts[k];
-  });
+  const vals = document.querySelectorAll('.trio-item__value');
+  ['en attente', 'acheté', 'offert'].forEach((k, i) => { if (vals[i]) vals[i].textContent = counts[k]; });
 }
 
 // ── Filtre ───────────────────────────────────────────────────
 function filteredItems() {
-  return ALL_ITEMS.filter(item => {
-    const okStatut = !activeStatut || item.statut_wishlist === activeStatut;
-    const okNature = !activeNature || item.nature_wishlist === activeNature;
-    return okStatut && okNature;
-  });
+  return ALL_ITEMS.filter(item =>
+    (!activeStatut || item.statut_wishlist === activeStatut) &&
+    (!activeNature || item.nature_wishlist === activeNature)
+  );
 }
 
-// ── Rendu liste items ────────────────────────────────────────
+// ── Rendu filtres ─────────────────────────────────────────────
+function renderFilters() {
+  const statBar = document.getElementById('filter-statuts');
+  const natBar  = document.getElementById('filter-natures');
+  if (!statBar || !natBar) return;
+
+  statBar.innerHTML =
+    `<button class="filter-tag filter-tag--reset${!activeStatut ? ' active' : ''}" data-statut="">tous</button>` +
+    STATUTS.map(s => {
+      const m = STATUT_META[s];
+      return `<button class="filter-tag${activeStatut === s ? ' active' : ''}" data-statut="${s}">${m.glyph} ${s}</button>`;
+    }).join('');
+
+  natBar.innerHTML =
+    `<button class="filter-tag filter-tag--reset${!activeNature ? ' active' : ''}" data-nature="">toutes</button>` +
+    NATURES.map(n =>
+      `<button class="filter-tag${activeNature === n ? ' active' : ''}" data-nature="${n}">${n}</button>`
+    ).join('');
+
+  statBar.querySelectorAll('.filter-tag').forEach(btn => btn.addEventListener('click', () => {
+    activeStatut = btn.dataset.statut || null;
+    renderFilters(); renderItems();
+  }));
+  natBar.querySelectorAll('.filter-tag').forEach(btn => btn.addEventListener('click', () => {
+    activeNature = btn.dataset.nature || null;
+    renderFilters(); renderItems();
+  }));
+}
+
+// ── Rendu items ──────────────────────────────────────────────
 function renderItems() {
-  const items = filteredItems();
+  const items     = filteredItems();
   const container = document.getElementById('items-container');
   if (!container) return;
 
-  if (items.length === 0) {
+  if (!items.length) {
     container.innerHTML = `
       <div class="empty-state">
         <span class="empty-state__glyph">◌</span>
-        <p>Aucun objet ne correspond à cette sélection.</p>
+        <span>aucun objet pour cette sélection</span>
       </div>`;
     return;
   }
 
-  // Grouper par nature_group puis par nature
+  // Grouper par groupe de nature puis par nature
   const grouped = {};
   items.forEach(item => {
-    const g = NATURE_GROUPS.find(g => g.natures.includes(item.nature_wishlist));
-    const groupLabel = g ? g.label : 'Autres';
-    if (!grouped[groupLabel]) grouped[groupLabel] = {};
+    const g     = NATURE_GROUPS.find(g => g.natures.includes(item.nature_wishlist));
+    const gLabel = g ? g.label : 'Autres';
+    if (!grouped[gLabel]) grouped[gLabel] = { meta: g, natures: {} };
     const nat = item.nature_wishlist;
-    if (!grouped[groupLabel][nat]) grouped[groupLabel][nat] = [];
-    grouped[groupLabel][nat].push(item);
+    if (!grouped[gLabel].natures[nat]) grouped[gLabel].natures[nat] = [];
+    grouped[gLabel].natures[nat].push(item);
   });
 
   let html = '';
-  Object.entries(grouped).forEach(([groupLabel, natures]) => {
-    const g = NATURE_GROUPS.find(x => x.label === groupLabel);
+  Object.entries(grouped).forEach(([groupLabel, { meta, natures }]) => {
     html += `<div class="item-group">
       <div class="item-group__header">
-        <span class="item-group__icon">${g ? g.icon : '✦'}</span>
+        <span class="item-group__icon">${meta ? meta.icon : '✦'}</span>
         <span class="item-group__label">${groupLabel}</span>
       </div>`;
 
     Object.entries(natures).forEach(([nat, natItems]) => {
-      html += `<div class="item-nature-label">${nat}</div>`;
-      html += `<div class="capsule-grid">`;
+      html += `<p class="item-nature-label">${nat}</p>`;
+      html += `<div class="wishlist-grid">`;
       natItems.forEach(item => {
-        const sm = STATUT_META[item.statut_wishlist] || { glyph: '·', cls: '' };
+        const sm   = STATUT_META[item.statut_wishlist] || { glyph: '·', cls: 'statut--attente' };
         const prix = item.prix_wishlist ? `${parseFloat(item.prix_wishlist).toFixed(2)} €` : '—';
         const lien = item.lien_wishlist
           ? `<a class="card__link" href="${item.lien_wishlist}" target="_blank" rel="noopener">↗ voir</a>`
-          : '';
+          : '<span></span>';
         html += `
           <div class="card" data-id="${item.id}">
-            <div class="card__top">
-              <span class="card__statut ${sm.cls}" title="${item.statut_wishlist}">${sm.glyph}</span>
+            <div class="card__header">
+              <div class="card__top">
+                <span class="card__statut ${sm.cls}">${sm.glyph} ${item.statut_wishlist}</span>
+              </div>
               <div class="card__actions">
                 <button class="card__btn card__btn--edit" data-id="${item.id}" title="Modifier">✎</button>
                 <button class="card__btn card__btn--del"  data-id="${item.id}" title="Supprimer">✕</button>
               </div>
             </div>
             <p class="card__title">${item.titre_wishlist || '—'}</p>
-            <p class="card__desc">${item.boutique_wishlist || ''}</p>
+            ${item.boutique_wishlist ? `<p class="card__desc">${item.boutique_wishlist}</p>` : ''}
             <div class="card__footer">
               <span class="card__prix">${prix}</span>
               ${lien}
@@ -179,14 +167,13 @@ function renderItems() {
 
   container.innerHTML = html;
 
-  // Events delete & edit
+  // Events
   container.querySelectorAll('.card__btn--del').forEach(btn => {
     btn.addEventListener('click', async e => {
       e.stopPropagation();
-      const id = btn.dataset.id;
       if (!confirm('Supprimer cet item ?')) return;
-      await deleteItem(id);
-      ALL_ITEMS = ALL_ITEMS.filter(i => i.id != id);
+      await deleteItem(btn.dataset.id);
+      ALL_ITEMS = ALL_ITEMS.filter(i => i.id != btn.dataset.id);
       updateHeroTrio(ALL_ITEMS);
       renderItems();
     });
@@ -195,81 +182,56 @@ function renderItems() {
   container.querySelectorAll('.card__btn--edit').forEach(btn => {
     btn.addEventListener('click', e => {
       e.stopPropagation();
-      const id = btn.dataset.id;
-      const item = ALL_ITEMS.find(i => i.id == id);
-      if (item) openModal(item);
+      const item = ALL_ITEMS.find(i => i.id == btn.dataset.id);
+      if (item) openPanel(item);
     });
   });
 }
 
-// ── Filtres UI ───────────────────────────────────────────────
-function renderFilters() {
-  const statBar = document.getElementById('filter-statuts');
-  const natBar  = document.getElementById('filter-natures');
-  if (!statBar || !natBar) return;
-
-  // Statuts
-  statBar.innerHTML = `<button class="filter-chip${!activeStatut ? ' active' : ''}" data-statut="">Tous</button>`
-    + STATUTS.map(s => {
-      const sm = STATUT_META[s];
-      return `<button class="filter-chip${activeStatut === s ? ' active' : ''}" data-statut="${s}">
-        <span>${sm.glyph}</span> ${s}
-      </button>`;
-    }).join('');
-
-  // Natures (groupées)
-  natBar.innerHTML = `<button class="filter-chip${!activeNature ? ' active' : ''}" data-nature="">Toutes</button>`
-    + NATURES.map(n =>
-        `<button class="filter-chip${activeNature === n ? ' active' : ''}" data-nature="${n}">${n}</button>`
-      ).join('');
-
-  statBar.querySelectorAll('.filter-chip').forEach(btn => {
-    btn.addEventListener('click', () => {
-      activeStatut = btn.dataset.statut || null;
-      renderFilters();
-      renderItems();
-    });
-  });
-
-  natBar.querySelectorAll('.filter-chip').forEach(btn => {
-    btn.addEventListener('click', () => {
-      activeNature = btn.dataset.nature || null;
-      renderFilters();
-      renderItems();
-    });
-  });
-}
-
-// ── Modal ajout / édition ────────────────────────────────────
-function openModal(item = null) {
+// ── Panel droit (pattern panel.css) ─────────────────────────
+function openPanel(item = null) {
   editingId = item ? item.id : null;
-  const modal = document.getElementById('item-modal');
-  const form  = document.getElementById('item-form');
+  const panel   = document.getElementById('wishlist-panel');
+  const overlay = document.getElementById('wishlist-overlay');
+  const title   = document.getElementById('panel-form-title');
 
-  form['titre_wishlist'].value    = item?.titre_wishlist    || '';
-  form['lien_wishlist'].value     = item?.lien_wishlist     || '';
-  form['prix_wishlist'].value     = item?.prix_wishlist     || '';
-  form['boutique_wishlist'].value = item?.boutique_wishlist || '';
-  form['statut_wishlist'].value   = item?.statut_wishlist   || 'en attente';
-  form['nature_wishlist'].value   = item?.nature_wishlist   || 'haut';
+  title.textContent = item ? 'modifier l\'item' : 'nouvel item';
 
-  document.getElementById('modal-title').textContent = item ? 'Modifier l\'item' : 'Ajouter un item';
-  modal.classList.add('open');
+  // Remplir le formulaire
+  const f = document.getElementById('wishlist-form');
+  f['titre_wishlist'].value    = item?.titre_wishlist    || '';
+  f['lien_wishlist'].value     = item?.lien_wishlist     || '';
+  f['prix_wishlist'].value     = item?.prix_wishlist     || '';
+  f['boutique_wishlist'].value = item?.boutique_wishlist || '';
+
+  // Sélecteurs boutons statut
+  document.querySelectorAll('[data-form-statut]').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.formStatut === (item?.statut_wishlist || 'en attente'));
+  });
+  document.querySelectorAll('[data-form-nature]').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.formNature === (item?.nature_wishlist || 'haut'));
+  });
+
+  panel.classList.add('open');
+  overlay.classList.add('visible');
+  document.body.classList.add('panel-open');
 }
 
-function closeModal() {
-  document.getElementById('item-modal').classList.remove('open');
+function closePanel() {
+  document.getElementById('wishlist-panel').classList.remove('open');
+  document.getElementById('wishlist-overlay').classList.remove('visible');
+  document.body.classList.remove('panel-open');
   editingId = null;
 }
 
 // ── Init ─────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
-  document.title = PAGE.title;
+  document.title = 'antichambreV · wishlist';
 
   const page = document.getElementById('scroll-page');
   const nav  = document.getElementById('scroll-nav');
 
-  // Hero
+  // ── Hero ──────────────────────────────────────────────────
   page.insertAdjacentHTML('beforeend', `
     <section class="scroll-section" id="section-00">
       <div class="hero-bg">
@@ -278,182 +240,235 @@ document.addEventListener('DOMContentLoaded', async () => {
         <div class="orb orb--3"></div>
       </div>
       <div class="hero-content">
-        <p class="hero-glyph">${PAGE.hero.glyph}</p>
-        <h1 class="hero-title">${PAGE.hero.title}</h1>
+        <p class="hero-glyph">✦ · ✦ · ✦  ·  désirs catalogués</p>
+        <h1 class="hero-title">wish<em>list</em></h1>
         <div class="hero-data">
-          ${PAGE.hero.dataLines.map(l => `<span class="hero-data__line">${l}</span>`).join('')}
+          <span class="hero-data__line">objets convoités · classés · archivés</span>
+          <span class="hero-data__line">statut · nature · boutique</span>
+          <span class="hero-data__line">antichambreV © 2025</span>
         </div>
         <div class="hero-trio">
-          ${PAGE.hero.trio.map(t => `
-            <div class="trio-item">
-              <span class="trio-item__label">${t.label}</span>
-              <span class="trio-item__glyph">${t.glyph}</span>
-              <span class="trio-item__value">${t.value}</span>
-            </div>
-          `).join('')}
+          <div class="trio-item">
+            <span class="trio-item__label">en attente</span>
+            <span class="trio-item__glyph">○</span>
+            <span class="trio-item__value">—</span>
+          </div>
+          <div class="trio-item">
+            <span class="trio-item__label">acheté</span>
+            <span class="trio-item__glyph">✓</span>
+            <span class="trio-item__value">—</span>
+          </div>
+          <div class="trio-item">
+            <span class="trio-item__label">offert</span>
+            <span class="trio-item__glyph">♡</span>
+            <span class="trio-item__value">—</span>
+          </div>
         </div>
       </div>
     </section>
   `);
 
-  // Section wishlist
+  // ── Section wishlist ──────────────────────────────────────
   page.insertAdjacentHTML('beforeend', `
     <section class="scroll-section scroll-section--alt" id="section-01">
       <p class="section-eyebrow">01 · inventaire des désirs</p>
       <h2 class="section-title">wish<br><em>list</em></h2>
-
       <div class="section-divider"></div>
 
-      <!-- Filtres -->
+      <!-- Filtres — utilise les classes section.css -->
       <div class="filters-wrapper">
-        <div class="filters-row">
-          <span class="filters-label">Statut</span>
-          <div class="filter-chips" id="filter-statuts"></div>
+        <div class="filter-group">
+          <span class="filter-group__label">statut</span>
+          <div class="filter-group__tags" id="filter-statuts"></div>
         </div>
-        <div class="filters-row">
-          <span class="filters-label">Nature</span>
-          <div class="filter-chips" id="filter-natures"></div>
+        <div class="filter-group">
+          <span class="filter-group__label">nature</span>
+          <div class="filter-group__tags" id="filter-natures"></div>
         </div>
       </div>
 
       <!-- Bouton ajout -->
       <div class="add-bar">
-        <button class="btn-add" id="btn-open-modal">
-          <span>+</span> Ajouter un item
-        </button>
+        <button class="btn-add" id="btn-open-panel">+ ajouter un item</button>
       </div>
 
-      <!-- Liste -->
+      <!-- Items -->
       <div id="items-container">
         <div class="loading-state">
           <span class="loading-glyph">✦</span>
-          <p>Chargement…</p>
+          <span>chargement…</span>
         </div>
       </div>
     </section>
   `);
 
-  // Nav latérale
-  const NAV_ITEMS = [
+  // ── Nav latérale ──────────────────────────────────────────
+  const NAV = [
     { id: 'section-00', label: 'identité' },
     { id: 'section-01', label: 'wishlist' },
   ];
-  nav.innerHTML = NAV_ITEMS.map((item, i) => `
+  nav.innerHTML = NAV.map((item, i) => `
     <a class="scroll-nav__item${i === 0 ? ' active' : ''}" href="#${item.id}">
       <span class="scroll-nav__label">${item.label}</span>
       <span class="scroll-nav__dot"></span>
     </a>
   `).join('');
 
-  const allSections = document.querySelectorAll('.scroll-section');
-  const navItems    = document.querySelectorAll('.scroll-nav__item');
   const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      navItems.forEach(i => i.classList.remove('active'));
-      const active = document.querySelector(`.scroll-nav__item[href="#${entry.target.id}"]`);
-      if (active) active.classList.add('active');
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      document.querySelectorAll('.scroll-nav__item').forEach(n => n.classList.remove('active'));
+      const a = document.querySelector(`.scroll-nav__item[href="#${e.target.id}"]`);
+      if (a) a.classList.add('active');
     });
   }, { threshold: 0.3 });
-  allSections.forEach(s => observer.observe(s));
+  document.querySelectorAll('.scroll-section').forEach(s => observer.observe(s));
 
-  // Modal HTML
+  // ── Panel HTML (pattern panel.css) ────────────────────────
   document.body.insertAdjacentHTML('beforeend', `
-    <div class="modal-overlay" id="item-modal">
-      <div class="modal">
-        <div class="modal__header">
-          <h3 id="modal-title">Ajouter un item</h3>
-          <button class="modal__close" id="btn-close-modal">✕</button>
+    <div class="panel-overlay" id="wishlist-overlay"></div>
+    <aside class="panel" id="wishlist-panel">
+      <div class="panel__inner">
+
+        <button class="panel__close" id="btn-close-panel">fermer ✕</button>
+
+        <div class="panel__eyebrow">
+          <span class="panel__tag">wishlist</span>
+          <span class="panel__status" id="panel-form-title">nouvel item</span>
         </div>
-        <form id="item-form" class="modal__form">
+
+        <div class="panel__divider"></div>
+
+        <form id="wishlist-form" class="wishlist-form">
+
+          <!-- Titre -->
           <div class="form-field">
-            <label>Titre *</label>
-            <input type="text" name="titre_wishlist" required placeholder="Nom de l'item" />
+            <label class="form-label">titre *</label>
+            <input class="form-input" type="text" name="titre_wishlist" required placeholder="nom de l'item" />
           </div>
+
+          <!-- Lien -->
           <div class="form-field">
-            <label>Lien</label>
-            <input type="url" name="lien_wishlist" placeholder="https://…" />
+            <label class="form-label">lien</label>
+            <input class="form-input" type="url" name="lien_wishlist" placeholder="https://…" />
           </div>
+
+          <!-- Prix + Boutique -->
           <div class="form-row">
             <div class="form-field">
-              <label>Prix (€)</label>
-              <input type="number" name="prix_wishlist" step="0.01" min="0" placeholder="0.00" />
+              <label class="form-label">prix (€)</label>
+              <input class="form-input" type="number" name="prix_wishlist" step="0.01" min="0" placeholder="0.00" />
             </div>
             <div class="form-field">
-              <label>Boutique</label>
-              <input type="text" name="boutique_wishlist" placeholder="ZARA, Sezane…" />
+              <label class="form-label">boutique</label>
+              <input class="form-input" type="text" name="boutique_wishlist" placeholder="sezane, zara…" />
             </div>
           </div>
-          <div class="form-row">
-            <div class="form-field">
-              <label>Statut</label>
-              <select name="statut_wishlist">
-                ${STATUTS.map(s => `<option value="${s}">${s}</option>`).join('')}
-              </select>
-            </div>
-            <div class="form-field">
-              <label>Nature</label>
-              <select name="nature_wishlist">
-                ${NATURES.map(n => `<option value="${n}">${n}</option>`).join('')}
-              </select>
+
+          <!-- Statut -->
+          <div class="form-field">
+            <label class="form-label">statut</label>
+            <div class="form-select-group">
+              ${STATUTS.map(s => `
+                <button type="button" class="form-select-btn" data-form-statut="${s}">${s}</button>
+              `).join('')}
             </div>
           </div>
+
+          <!-- Nature -->
+          <div class="form-field">
+            <label class="form-label">nature</label>
+            <div class="form-select-group">
+              ${NATURES.map(n => `
+                <button type="button" class="form-select-btn" data-form-nature="${n}">${n}</button>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Actions — btn-primary / btn-secondary d'atelier.css -->
           <div class="form-actions">
-            <button type="button" class="btn-cancel" id="btn-cancel-modal">Annuler</button>
-            <button type="submit" class="btn-submit">Enregistrer</button>
+            <button type="button" class="btn-secondary" id="btn-cancel-panel">annuler</button>
+            <button type="submit"  class="btn-primary"  id="btn-submit-panel">enregistrer</button>
           </div>
+
+          <p class="form-error hidden" id="form-error"></p>
+
         </form>
       </div>
-    </div>
+    </aside>
   `);
 
-  // Modal events
-  document.getElementById('btn-open-modal').addEventListener('click', () => openModal());
-  document.getElementById('btn-close-modal').addEventListener('click', closeModal);
-  document.getElementById('btn-cancel-modal').addEventListener('click', closeModal);
-  document.getElementById('item-modal').addEventListener('click', e => {
-    if (e.target === e.currentTarget) closeModal();
+  // ── Events panel ──────────────────────────────────────────
+  document.getElementById('btn-open-panel').addEventListener('click',  () => openPanel());
+  document.getElementById('btn-close-panel').addEventListener('click', closePanel);
+  document.getElementById('btn-cancel-panel').addEventListener('click', closePanel);
+  document.getElementById('wishlist-overlay').addEventListener('click', closePanel);
+
+  // Sélecteurs statut / nature (boutons toggle)
+  document.querySelectorAll('[data-form-statut]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-form-statut]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+  document.querySelectorAll('[data-form-nature]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-form-nature]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
   });
 
-  document.getElementById('item-form').addEventListener('submit', async e => {
+  // Soumission formulaire
+  document.getElementById('wishlist-form').addEventListener('submit', async e => {
     e.preventDefault();
-    const form = e.target;
+    const f       = e.target;
+    const errEl   = document.getElementById('form-error');
+    const submitBtn = document.getElementById('btn-submit-panel');
+
+    const statutBtn = document.querySelector('[data-form-statut].active');
+    const natureBtn = document.querySelector('[data-form-nature].active');
+
+    if (!statutBtn || !natureBtn) {
+      errEl.textContent = 'Veuillez sélectionner un statut et une nature.';
+      errEl.classList.remove('hidden');
+      return;
+    }
+
+    errEl.classList.add('hidden');
+    submitBtn.textContent = '…';
+    submitBtn.disabled = true;
+
     const payload = {
-      titre_wishlist:    form['titre_wishlist'].value.trim(),
-      lien_wishlist:     form['lien_wishlist'].value.trim()     || null,
-      prix_wishlist:     form['prix_wishlist'].value            || null,
-      boutique_wishlist: form['boutique_wishlist'].value.trim() || null,
-      statut_wishlist:   form['statut_wishlist'].value,
-      nature_wishlist:   form['nature_wishlist'].value,
+      titre_wishlist:    f['titre_wishlist'].value.trim(),
+      lien_wishlist:     f['lien_wishlist'].value.trim()     || null,
+      prix_wishlist:     f['prix_wishlist'].value            || null,
+      boutique_wishlist: f['boutique_wishlist'].value.trim() || null,
+      statut_wishlist:   statutBtn.dataset.formStatut,
+      nature_wishlist:   natureBtn.dataset.formNature,
     };
 
     try {
-      const btn = form.querySelector('.btn-submit');
-      btn.textContent = '…';
-      btn.disabled = true;
-
       if (editingId) {
         await updateItem(editingId, payload);
         const idx = ALL_ITEMS.findIndex(i => i.id == editingId);
         if (idx >= 0) ALL_ITEMS[idx] = { ...ALL_ITEMS[idx], ...payload };
       } else {
         const created = await insertItem(payload);
-        if (created && created[0]) ALL_ITEMS.unshift(created[0]);
+        if (created?.[0]) ALL_ITEMS.unshift(created[0]);
       }
-
       updateHeroTrio(ALL_ITEMS);
       renderItems();
-      closeModal();
+      closePanel();
     } catch (err) {
-      alert('Erreur : ' + err.message);
+      errEl.textContent = 'Erreur : ' + err.message;
+      errEl.classList.remove('hidden');
     } finally {
-      const btn = form.querySelector('.btn-submit');
-      btn.textContent = 'Enregistrer';
-      btn.disabled = false;
+      submitBtn.textContent = 'enregistrer';
+      submitBtn.disabled = false;
     }
   });
 
-  // Chargement données
+  // ── Chargement initial ────────────────────────────────────
   try {
     ALL_ITEMS = await fetchAll();
     updateHeroTrio(ALL_ITEMS);
@@ -463,7 +478,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('items-container').innerHTML = `
       <div class="empty-state">
         <span class="empty-state__glyph">⚠</span>
-        <p>Impossible de charger les données.<br><small>${err.message}</small></p>
+        <span>impossible de charger les données<br><small>${err.message}</small></span>
       </div>`;
   }
 });
