@@ -286,7 +286,7 @@ const SECTIONS = [
   },
 
 ];
-```
+
 
 // ============================================================
 // RENDU — ne pas modifier en dessous sauf si tu sais ce que tu fais
