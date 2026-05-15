@@ -451,6 +451,15 @@ const CARDS = [
     status: `Élégant · sans alcool`,
     links: []
   },
+    {
+    id: 45,
+    title: `Everything but Bagel`,
+    desc: `Graines de sésame (noires & blanches · graines de pavot · ail semoul · oignon séché · fleur de sel)`,
+    content: `3 càs graines de sésames blanches <br/> 3 càs graines de sésames noires <br/> 6 càs graine de pavot <br/> 4 càs &/2 ail semoule <br/> 4 càs oignon séché <br/> 6 càs de fleur de sel`,
+    tags: [`conserves`],
+    status: `Bon partout`,
+    links: []
+  },
 ];
 
 
