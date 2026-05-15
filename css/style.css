@@ -121,13 +121,18 @@
       line-height: 1.1;
     }
 
-.sidebar__title a {
+.sidebar__title a:hover {
   color: inherit;          /* Pour qu'il prenne la couleur du titre H1 */
   text-decoration: none;   /* Pour enlever le soulignement bleu moche par défaut */
   border-bottom :  1px solid var(--c-border);
 }
 
-.sidebar__title a span {
+.sidebar__title a {
+  color: inherit;          /* Pour qu'il prenne la couleur du titre H1 */
+  text-decoration: none;   /* Pour enlever le soulignement bleu moche par défaut */
+}
+
+.sidebar__title a:hover span {
   color: var(--c-accent-blue); /* Exemple pour mettre le V en rouge */
   font-weight: bold;
 }
