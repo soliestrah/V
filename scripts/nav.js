@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (layout) layout.insertAdjacentHTML('afterbegin', nav);
 
   // Détection automatique du lien actif
-  const current = window.location.peathname.split('/').pop() || 'index.html';
+  const current = window.location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.nav__item a').forEach(a => {
     if (a.getAttribute('href') === current) {
       a.classList.add('active');
