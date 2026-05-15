@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <li class="nav__item"><a href="astral.html"><span class="nav__index">06</span>astrologie</a></li>
           <li class="nav__item"><a href="wardrobe.html"><span class="nav__index">07</span>wardrobe</a></li>
           <li class="nav__item"><a href="wishlist.html"><span class="nav__index">08</span>wishlist</a></li>
-          <li class="nav__item"><a href="wardrobecpasule.html"><span class="nav__index">09</span>la capsule</a></li>
+          <li class="nav__item"><a href="wardrobecapsule.html"><span class="nav__index">09</span>la capsule</a></li>
           <li class="nav__item"><a href="charte.html"><span class="nav__index">10</span>charte</a></li></ul>
        </nav>
 
