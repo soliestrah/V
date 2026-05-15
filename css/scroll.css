@@ -172,12 +172,17 @@ html { scroll-behavior: smooth; }
 
 .hero-glyph {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 1rem;
   letter-spacing: 0.3em;
   color: var(--c-accent-prune);
   margin-bottom: var(--gap-md);
   opacity: 0;
   animation: fade-up 1s var(--ease) 0.3s forwards;
+}
+
+.hero-glyph a {
+  color: inherit;          /* Pour qu'il prenne la couleur du titre H1 */
+  text-decoration: none;   /* Pour enlever le soulignement bleu moche par défaut */
 }
 
 .hero-title {
