@@ -5,7 +5,6 @@
 // 1. On range toutes les données proprement dans l'objet PAGE
 const PAGE = {
   eyebrow: `antichambreV · ce qui pousse dans le jardin`,
-  glyph: `✦ <a href="convoitises.html">les plantes que j'aimerais</a>`,
   title: `jardin`
 };
 
@@ -243,7 +242,6 @@ document.addEventListener(`DOMContentLoaded`, () => {
 
   // -- En-tête --
   document.querySelector(`.page-header__eyebrow`).textContent = PAGE.eyebrow;
-  document.querySelector(`.page-header__glyth`). textContent = PAGE.glyph;
   document.querySelector(`.page-header__title`).textContent   = PAGE.title;
 
   // -- Filtres --
