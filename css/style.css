@@ -18,7 +18,7 @@
       /* Typographie */
       --font-display: 'Croissant_One', Georgia, serif;
       --font-mono:    'Didact_Gothic', monospace;
-        --font-body: 'cabinet_grotesk', serif;
+        --font-body: 'cabinet-grotesk', serif;
  
       /* Espacement */
       --nav-width:    260px;
@@ -47,7 +47,7 @@
     }
 
     @font-face {
-      font-family: 'cabinet_grotesk';
+      font-family: 'cabinet-grotesk';
       src: url('fonts/CabinetGrotesk-Regular.otf') format('truetype');
     }
 
