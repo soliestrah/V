@@ -2,9 +2,11 @@
 // CONFIGURATION — tout modifier ici, ne pas toucher au HTML
 // ============================================================
 
+// 1. On range toutes les données proprement dans l'objet PAGE
 const PAGE = {
   eyebrow: `antichambreV · ce qui pousse dans le jardin`,
   title: `jardin`,
+  glyph: `<p class="hero-glyph">✦ · ✦ · ✦  ·  désirs catalogués <br>✦ <a href="wardrobe.html">garde2robe</a>✦ <a href="wardrobecapsule.html">capsule</a></p>`
 };
 
 // Groupes de filtres
@@ -241,6 +243,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
 
   // -- En-tête --
   document.querySelector(`.page-header__eyebrow`).textContent = PAGE.eyebrow;
+  document.querySelector(`.page-header`).insertAdjacentHTML('beforeend', PAGE.glyph);
   document.querySelector(`.page-header__title`).textContent   = PAGE.title;
 
   // -- Filtres --
