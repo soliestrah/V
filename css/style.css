@@ -48,7 +48,7 @@
 
     @font-face {
       font-family: 'cabinet-grotesk';
-      src: url('fonts/CabinetGrotesk-Regular.otf') format('truetype');
+      src: url('fonts/CabinetGrotesk-Regular.otf') format('OpenType');
     }
 
     /* ============================================================
