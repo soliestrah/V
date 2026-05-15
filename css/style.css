@@ -124,7 +124,12 @@
 .sidebar__title a {
   color: inherit;          /* Pour qu'il prenne la couleur du titre H1 */
   text-decoration: none;   /* Pour enlever le soulignement bleu moche par défaut */
-  /* Ajoute tes autres styles ici (font-weight, letter-spacing, etc.) */
+  border-bottom :  1px solid var(--c-border);
+}
+
+.sidebar__title a span {
+  color: var(--c-accent-blue); /* Exemple pour mettre le V en rouge */
+  font-weight: bold;
 }
  
     .sidebar__title span {
@@ -182,6 +187,7 @@
                   background var(--dur) var(--ease);
       border-radius: 0 4px 4px 0;
     }
+
  
     .nav__item a:hover,
     .nav__item a.active {
