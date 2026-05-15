@@ -120,6 +120,12 @@
       color: var(--c-text);
       line-height: 1.1;
     }
+
+.sidebar__title a {
+  color: inherit;          /* Pour qu'il prenne la couleur du titre H1 */
+  text-decoration: none;   /* Pour enlever le soulignement bleu moche par défaut */
+  /* Ajoute tes autres styles ici (font-weight, letter-spacing, etc.) */
+}
  
     .sidebar__title span {
       color: var(--c-accent-rose);
