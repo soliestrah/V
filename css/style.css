@@ -48,11 +48,11 @@
 
     @font-face {
       font-family: 'cabinet-grotesk';
-      src: url('fonts/CabinetGrotesk-Regular.otf') format('OpenType');
+      src: url('fonts/CabinetGrotesk-Regular.otf') format('opentype');
     }
 
     /* ============================================================
-       RESET
+       RESETe
        ============================================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
