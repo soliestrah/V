@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <aside class="sidebar" role="navigation" aria-label="Navigation principale">
 
       <div class="sidebar__identity">
-        <h1 class="sidebar__title">antichambre<span>V</span></h1>
+        <h1 class="sidebar__title"><a href="index.html">antichambre<span>V</span></a></h1>
         <p class="sidebar__subtitle">soliestrah</p>
         <div class="sidebar__divider"></div>
       </div>
@@ -19,9 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
           <li class="nav__item"><a href="atelier.html"><span class="nav__index">04</span>atelier</a></li>
           <li class="nav__item"><a href="medecin.html"><span class="nav__index">05</span>medecin</a></li>
           <li class="nav__item"><a href="astral.html"><span class="nav__index">06</span>astrologie</a></li>
-          <li class="nav__item"><a href="wardrobe.html"><span class="nav__index">07</span>wardrobe</a></li></ul>
-          <li class="nav__item"><a href="wishlist.html"><span class="nav__index">08</span>wishlist</a></li></ul>
-          <li class="nav__item"><a href="wardrobecpasule.html"><span class="nav__index">09</span>la capsule</a></li></ul> 
+          <li class="nav__item"><a href="wardrobe.html"><span class="nav__index">07</span>wardrobe</a></li>
+          <li class="nav__item"><a href="wishlist.html"><span class="nav__index">08</span>wishlist</a></li>
+          <li class="nav__item"><a href="wardrobecpasule.html"><span class="nav__index">09</span>la capsule</a></li>
           <li class="nav__item"><a href="charte.html"><span class="nav__index">10</span>charte</a></li></ul>
        </nav>
 
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (layout) layout.insertAdjacentHTML('afterbegin', nav);
 
   // Détection automatique du lien actif
-  const current = window.location.pathname.split('/').pop() || 'index.html';
+  const current = window.location.peathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.nav__item a').forEach(a => {
     if (a.getAttribute('href') === current) {
       a.classList.add('active');
