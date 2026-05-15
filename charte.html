@@ -13,30 +13,8 @@
   <div class="layout">
 
     <!-- SIDEBAR -->
-    <aside class="sidebar">
-      <div class="sidebar__identity">
-        <h1 class="sidebar__title">antichambre<span>V</span></h1>
-        <p class="sidebar__subtitle">charte natale</p>
-      </div>
-      <div class="sidebar__divider"></div>
-      <p class="nav__label">sections</p>
-      <nav>
-        <ul class="nav__list">
-          <li class="nav__item"><a href="#section-00"><span class="nav__index">00</span> portrait</a></li>
-          <li class="nav__item"><a href="#section-01"><span class="nav__index">01</span> trinité</a></li>
-          <li class="nav__item"><a href="#section-02"><span class="nav__index">02</span> planètes</a></li>
-          <li class="nav__item"><a href="#section-03"><span class="nav__index">03</span> human design</a></li>
-          <li class="nav__item"><a href="#section-04"><span class="nav__index">04</span> vocation</a></li>
-          <li class="nav__item"><a href="#section-05"><span class="nav__index">05</span> relations</a></li>
-          <li class="nav__item"><a href="#section-06"><span class="nav__index">06</span> style</a></li>
-          <li class="nav__item"><a href="#section-07"><span class="nav__index">07</span> ombre & lumière</a></li>
-        </ul>
-      </nav>
-      <div class="sidebar__footer">
-        <p class="sidebar__sign">antichambreV · usage personnel</p>
-      </div>
-    </aside>
-
+  <nav class="scroll-nav" id="scroll-nav" aria-label="Sections"></nav>
+e
     <!-- SCROLL PAGE -->
     <main class="scroll-page" id="scroll-page">
 
@@ -427,7 +405,7 @@
   </div>
 
   <!-- NAV LATÉRALE DROITE -->
-  <nav class="scroll-nav" id="scroll-nav" aria-label="Navigation sections"></nav>
+  <nav class="scroll-page" id="scroll-page" aria-label="Navigation sections"></nav>
 
   <script src="scripts/nav.js"></script>
   <script>
@@ -470,5 +448,6 @@
       if (el) observer.observe(el);
     });
   </script>
+  
 </body>
 </html>
