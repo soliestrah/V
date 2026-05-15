@@ -243,7 +243,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
 
   // -- En-tête --
   document.querySelector(`.page-header__eyebrow`).textContent = PAGE.eyebrow;
-  document.querySelector(`.page-header`). textContent = PAGE.glyph;
+  document.querySelector(`.page-glyth`). textContent = PAGE.glyph;
   document.querySelector(`.page-header__title`).textContent   = PAGE.title;
 
   // -- Filtres --
