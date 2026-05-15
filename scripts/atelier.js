@@ -39,6 +39,8 @@ const NATURES = [
   { value: 'learning',    label: 'learning' },
   { value: 'film',    label: 'film' },
   { value: 'livre',    label: 'livre' },
+    { value: 'serie',    label: 'serie' },
+   { value: 'journaling',    label: 'journaling' },
   { value: 'autre',       label: 'autre' },
 ];
 
