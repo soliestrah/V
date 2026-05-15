@@ -46,6 +46,11 @@
       src: url('fonts/Imbue/Imbue-VariableFont_opsz,wght.ttf') format('truetype');
     }
 
+    @font-face {
+      font-family: 'cabinet_grotesk';
+      src: url('fonts/cabinet_grotesk/cabinet_grotesk-regular.otf') format('truetype');
+    }
+
     /* ============================================================
        RESET
        ============================================================ */
