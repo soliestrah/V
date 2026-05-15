@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         <div class="orb orb--3"></div>
       </div>
       <div class="hero-content">
-        <p class="hero-glyph">✦ · ✦ · ✦  ·  désirs catalogués <br>✦ <a href="wardrobe.html">garde2robe</a>✦ <a href="wardrobecapsule.html">capsule</a></p>
+        <p class="hero-glyph">✦ · ✦ · ✦  ·  désirs catalogués <br>✦ <a href="wardrobe.html">garde2robe</a> ✦ <a href="wardrobecapsule.html">capsule</a></p>
         <h1 class="hero-title">wish<em>list</em></h1>
         <div class="hero-data">
           <span class="hero-data__line">objets convoités · classés · archivés</span>
