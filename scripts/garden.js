@@ -5,7 +5,7 @@
 // 1. On range toutes les données proprement dans l'objet PAGE
 const PAGE = {
   eyebrow: `antichambreV · ce qui pousse dans le jardin`,
-  glyph: `<p class="hero-glyph">✦ <a href="convoitises.html">les plantes que j'aimerais</a></p>`,
+  glyph: `✦ <a href="convoitises.html">les plantes que j'aimerais</a>`,
   title: `jardin`
 };
 
