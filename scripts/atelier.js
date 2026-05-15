@@ -130,11 +130,12 @@ function renderCards() {
   const empty   = document.getElementById('empty');
   const counter = document.querySelector('.js-count');
 
-  const filtered = taches.filter(t => {
-    const okStatut = activeFilters.statut_atelier === 'all' || t.statut_atelier === activeFilters.statut_atelier;
-    const okNature = activeFilters.nature_atelier === 'all' || t.nature_atelier === activeFilters.nature_atelier;
-    return okStatut && okNature;
-  });
+const filtered = taches.filter(t => {
+  const okStatut = activeFilters.statut_atelier === 'all' || t.statut_atelier === activeFilters.statut_atelier;
+  const okNature = activeFilters.nature_atelier === 'all' || t.nature_atelier === activeFilters.nature_atelier;
+  const okArchive = activeFilters.statut_atelier === 'archive' || t.statut_atelier !== 'archive';
+  return okStatut && okNature && okArchive;
+});
 
   counter.textContent = filtered.length;
   empty.classList.toggle('visible', filtered.length === 0);
