@@ -13,13 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
         <p class="nav__label">navigation</p>
         <ul class="nav__list">
           <li class="nav__item"><a href="index.html"><span class="nav__index">00</span>accueil</a></li>
-          <li class="nav__item"><a href="garden.html"><span class="nav__index">01</span>jardin</a></li>
-          <li class="nav__item"><a href="recettes.html"><span class="nav__index">02</span>recettes</a></li>
-          <li class="nav__item"><a href="convoitises.html"><span class="nav__index">03</span>convoitises</a></li>
-          <li class="nav__item"><a href="atelier.html"><span class="nav__index">04</span>atelier</a></li>
-          <li class="nav__item"><a href="medecin.html"><span class="nav__index">05</span>medecin</a></li>
-          <li class="nav__item"><a href="charte.html"><span class="nav__index">06</span>charte</a></li>
-          <li class="nav__item"><a href="wishlist.html"><span class="nav__index">07</span>wishlist</a></li></ul>
+          <li class="nav__item"><a href="atelier.html"><span class="nav__index">01</span>atelier</a></li>
+          <li class="nav__item"><a href="garden.html"><span class="nav__index">02</span>jardin</a></li>
+          <li class="nav__item"><a href="recettes.html"><span class="nav__index">03</span>recettes</a></li>
+          <li class="nav__item"><a href="medecin.html"><span class="nav__index">04</span>medecin</a></li>
+          <li class="nav__item"><a href="charte.html"><span class="nav__index">05</span>charte</a></li>
+          <li class="nav__item"><a href="wishlist.html"><span class="nav__index">06</span>wishlist</a></li></ul>
        </nav>
 
       <footer class="sidebar__footer">
